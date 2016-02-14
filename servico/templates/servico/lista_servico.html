@@ -1,0 +1,36 @@
+{% extends 'servico/inicio_servico.html' %}
+
+{% block corpo %}
+<p>Serviço</p>
+
+<table>
+	<thead>
+		<th>Data de inclusão</th>
+		<th>Tipo</th>
+		<th>Data de Início</th>
+		<th>Data de Fim</th>
+		<th>Detalhes</th>
+	</thead>
+
+	<tbody>
+		{% for servico in lista_servicos %}
+			<tr>
+				<td>{{ servico.data_de_cadastro|date:"d \d\e F \d\e Y"}}</td>
+				<td>{{ servico.get_tipo_display }}</td>	
+				<td>{{ servico.data_de_inicio }}</td>
+				<td>{{ servico.data_de_fim }}</td>
+				<td><a href="/servico/{{ servico.id }}">Detalhes</a></td>
+			</tr>
+		{% empty %}
+			<tr>
+				<td>---</td>
+				<td>---</td>
+				<td>---</td>
+				<td>---</td>
+				<td>---</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

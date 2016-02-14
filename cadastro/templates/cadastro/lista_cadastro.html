@@ -1,0 +1,33 @@
+{% extends 'cadastro/inicio_cadastro.html' %}
+
+{% block corpo %}
+<p>Cadastros</p>
+
+<table>
+	<thead>
+		<th>Usuário</th>
+		<th>Tipo</th>
+		<th>Data de Cadastro</th>
+		<th>Detalhes</th>
+	</thead>
+
+	<tbody>
+		{% for cadastro in lista_cadastros %}
+			<tr>
+				<td>{{ cadastro.usuario.get_username }}</td>
+				<td>{{ cadastro.usuario.get_tipo_display }}</td>	
+				<td>{{ cadastro.usuario.date_joined|date:"d \d\e F \d\e Y"}}</td>
+				<td><a href="{{ cadastro.id }}">Detalhes</a></td>
+			</tr>
+		{% empty %}
+			<tr>
+				<td>---</td>
+				<td>---</td>
+				<td>---</td>
+				<td>---</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

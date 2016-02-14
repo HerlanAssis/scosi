@@ -1,0 +1,30 @@
+{% extends 'cadastro/inicio_cadastro.html' %}
+
+{% block corpo %}
+<p>Cadastros</p>
+
+<table>
+	<thead>
+		<th>Nome</th>
+		<th>Sobrenome</th>
+		<th>Detalhes</th>
+	</thead>
+
+	<tbody>
+		{% for cliente in lista_clientes %}
+			<tr>
+				<td>{{ cliente.nome }}</td>
+				<td>{{ cliente.sobrenome }}</td>	
+				<td><a href="{{ cadastro.id }}">Detalhes</a></td>
+			</tr>
+		{% empty %}
+			<tr>
+				<td>---</td>
+				<td>---</td>
+				<td>---</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

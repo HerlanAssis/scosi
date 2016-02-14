@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>{% block titulo %}{% endblock %}</title>
+	{% block link %}
+		{% load staticfiles %}
+		<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+	{% endblock %}
+	<meta charset="UTF-8"/>
+</head>
+
+<body>
+{% include "menu.html" %}
+{% block corpo %}
+	{% if user.is_authenticated %}
+		<a href="/logout/">Logout</a>
+    	<p>Bem vindo, {{ user.username }}.</p>
+	{% else %}
+		<a href="/login/">Login</a>
+    	<p>Bem vindo. Por favor entre com o seu login para ter acesso as suas funções.</p>
+    {% endif %}
+{% endblock %}
+{% include "rodape.html" %}
+</body>
+
+</html>
