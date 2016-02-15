@@ -25,6 +25,7 @@ urlpatterns = [
 
     url(r'^cadastro/', include('cadastro.urls', 'cadastro')),
     url(r'^servico/', include('servico.urls', 'servico')),
+    
     url(r'^login/', login, {'template_name':'login.html'}, name='login'),
     url(r'^logout/', logout_then_login, {'login_url':'/'}, name='logout'),
 ]

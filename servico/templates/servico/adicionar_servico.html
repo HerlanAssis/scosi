@@ -1,6 +1,7 @@
 {% extends 'servico/inicio_servico.html' %}
 
 {% block corpo %}
+	{{ block.super }}
 	<p>Serviço</p>
 	<form action="" method="post"> {% csrf_token %}
 		{{ form.as_p }}

@@ -1,6 +1,7 @@
 {% extends 'cadastro/inicio_cadastro.html' %}
 
 {% block corpo %}
+	{{ block.super }}
 <p>Cadastros</p>
 
 <table>
@@ -17,7 +18,7 @@
 				<td>{{ cadastro.usuario.get_username }}</td>
 				<td>{{ cadastro.usuario.get_tipo_display }}</td>	
 				<td>{{ cadastro.usuario.date_joined|date:"d \d\e F \d\e Y"}}</td>
-				<td><a href="{{ cadastro.id }}">Detalhes</a></td>
+				<td><a href="{% url 'cadastro:detalheCadastro' cadastro.id %}">Detalhes</a></td>
 			</tr>
 		{% empty %}
 			<tr>

@@ -2,7 +2,7 @@
 
 {% block corpo %}
 <p>Equipamento</p>
-
+	{{ block.super }}
 <table>
 	<thead>
 		<th>Nome</th>
@@ -13,7 +13,8 @@
 		{% for equipamento in lista_equipamentos %}
 			<tr>
 				<td>{{ equipamento.nome }}</td>
-				<td>{{ equipamento.descricao }}</td>	
+				<td>{{ equipamento.descricao }}</td>
+				<td><a href="{% url 'servico:detalheEquipamento' equipamento.id %} ">Detalhes</a></td>
 			</tr>
 		{% empty %}
 			<tr>

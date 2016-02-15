@@ -1,6 +1,7 @@
 {% extends 'cadastro/inicio_cliente.html' %}
 
 {% block corpo %}
+	{{ block.super }}
 	<p>Cliente</p>
 	<form action="" method="post"> {% csrf_token %}
 		{{ form.as_p }}
