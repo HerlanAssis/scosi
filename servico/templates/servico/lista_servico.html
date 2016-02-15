@@ -19,7 +19,7 @@
 				<td>{{ servico.get_tipo_display }}</td>	
 				<td>{{ servico.data_de_inicio }}</td>
 				<td>{{ servico.data_de_fim }}</td>
-				<td><a href=" {% url 'servico:detalheServico' servico.id }">Detalhes</a></td>
+				<td><a href=" {% url 'servico:detalheServico' servico.id %}">Detalhes</a></td>
 			</tr>
 		{% empty %}
 			<tr>

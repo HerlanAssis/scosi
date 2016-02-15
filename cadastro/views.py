@@ -65,14 +65,14 @@ def adicionarCliente(request):
 
 @login_required
 def listaCliente(request):
-	lista_cadastro = Cliente.objects.all()
+	lista_clientes = Cliente.objects.all()
 	template_name = 'cadastro/lista_cliente.html'
-	return render(request, template_name, {'lista_cadastros':lista_cadastro})
+	return render(request, template_name, {'lista_clientes':lista_clientes})
 
 @login_required
 def detalheCliente(request, nr_item):
 	cliente = get_object_or_404(Cliente, pk=nr_item)
-	return render_to_response('cadastro/detalhe_cliente.html', {'cliente':cliente})
+	return render_to_response('cadastro/detalhe_cliente.html', {'detalheCliente':cliente})
 
 @login_required
 def editarCliente(request, nr_item):

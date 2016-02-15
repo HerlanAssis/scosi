@@ -16,7 +16,7 @@
 			<tr>
 				<td>{{ cliente.nome }}</td>
 				<td>{{ cliente.sobrenome }}</td>	
-				<td><a href="{{ cadastro.id }}">Detalhes</a></td>
+				<td><a href="{% url 'cadastro:detalheCliente' cliente.id %}">Detalhes</a></td>
 			</tr>
 		{% empty %}
 			<tr>

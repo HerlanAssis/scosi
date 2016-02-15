@@ -3,5 +3,12 @@
 {% block corpo %}
 	{{ block.super }}
 	<p>Detalhe Cliente</p>
+
+	<p>
+		Nome: {{ cliente.nome }} <br/>
+		Sobrenome: {{ cliente.sobrenome }} <br/>
+		CPF: {{ cliente.cpf }} <br/>
+		Endereço: {{ cliente.endereco }} <br/>
+	</p>
 	
 {% endblock %}

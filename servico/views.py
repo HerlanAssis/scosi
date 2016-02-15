@@ -30,7 +30,7 @@ def listaServico(request):
 @login_required
 def detalheServico(request, nr_item):
 	servico = get_object_or_404(Servico, pk=nr_item)
-	return render_to_response('cadastro/detalhe_servico.html', {'servico':servico})
+	return render_to_response('servico/detalhe_servico.html', {'servico':servico})
 
 @login_required
 def editarServico(request, nr_item):

@@ -58,6 +58,18 @@ class Servico(models.Model):
 	def __str__(self):
 		return "%i: %s-%s" % (self.id, self.data_de_inicio, self.data_de_fim)
 
+	def funcionarios(self):
+		return Usuario.objects.filter(servico__id=self.id)
+
+	
+	def andamento(self):
+		if self.situacao and self.status:
+			return "Concluido!"
+		elif self.situacao and not self.status:
+			return "Pendente!"
+		else:
+			return "Cancelado!"
+
 	class Meta:
 		verbose_name = 'serviço'
 		verbose_name_plural = 'serviços'

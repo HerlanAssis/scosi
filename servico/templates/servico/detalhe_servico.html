@@ -3,5 +3,35 @@
 {% block corpo %}
 	{{ block.super }}
 	<p>Detalhe serviço</p>
-	
+
+	<p>
+		Data de cadastro: {{ servico.data_de_cadastro }} <br/>
+		Tipo do serviço: {{ servico.get_tipo_display }} <br/>
+		Data de início do serviço: {{ servico.data_de_inicio }} <br/>
+		Data de fim do serviço: {{ servico.data_de_dim }} <br/>
+		Valor cobrado: R$ {{ servico.valor }} <br/>
+		Andamento do servico: {{ servico.andamento }} <br/>
+
+		<table>
+		<thead>
+			<th colspan="2">Funcionarios</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Nome</td>
+				<td>Detalhes</td>
+			</tr>
+			{% for funcionario in servico.funcionarios %}
+				<tr>
+					<td>{{ funcionario }}</td>
+					<td><a href="{% url 'cadastro:detalheCadastro' funcionario.id %}">Detalhes</a></td>
+				</tr>
+			{% endfor %}
+		</tbody>
+		</table>
+		Cliente: <a href="{% url 'cadastro:detalheCliente' servico.cliente_id %}">{{ servico.cliente }} </a><br/>
+		Equipamento: <a href="{% url 'servico:detalheEquipamento' servico.equipamento_id %}">{{ servico.equipamento }} </a><br/>
+		Endereço: <a href="#">{{ servico.logradouro }} </a><br/>
+
+	</p>
 {% endblock %}
