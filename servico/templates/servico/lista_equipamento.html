@@ -1,0 +1,27 @@
+{% extends 'servico/inicio_equipamento.html' %}
+
+{% block corpo %}
+<p>Equipamento</p>
+
+<table>
+	<thead>
+		<th>Nome</th>
+		<th>Descrição</th>
+	</thead>
+
+	<tbody>
+		{% for equipamento in lista_equipamentos %}
+			<tr>
+				<td>{{ equipamento.nome }}</td>
+				<td>{{ equipamento.descricao }}</td>	
+			</tr>
+		{% empty %}
+			<tr>
+				<td>---</td>
+				<td>---</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{% endblock %}

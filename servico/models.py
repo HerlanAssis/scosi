@@ -12,7 +12,7 @@ from cadastro.models import Usuario, Cliente, Logradouro
 class Equipamento(models.Model):
 
 	nome = models.CharField(max_length=30, verbose_name='nome')
-	descricao = models.CharField(max_length=100, blank=True, verbose_name='descricao')
+	descricao = models.TextField(max_length=300, blank=True, verbose_name='descricao')
 
 	def __str__(self):
 		return "%s - %s" % (self.nome, self.descricao)

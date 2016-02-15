@@ -1,5 +1,5 @@
 <div class="menu">
-	<!--<ul>
+	<ul>
 		<li><a href="{% url 'home' %}">Início</a></li>
 		
 		<li>
@@ -14,7 +14,7 @@
 			<a href="{% url 'servico:homeServico' %}">Serviços</a>
 			<ul>
 				<li><a href="{% url 'servico:listarServico' %}">Listar</a></li>
-				<li><a href="{% url 'cadastro:adiconarServico' %}">Cadastrar Serviço</a></li>
+				<li><a href="{% url 'servico:adicionarServico' %}">Cadastrar Serviço</a></li>
 			</ul>
 		</li>
 		
@@ -27,13 +27,12 @@
 		</li>
 
 		<li>
-			<a href="{% url 'cadastrar:homeCliente' %}">Equipamento</a>
+			<a href="{% url 'cadastro:homeCliente' %}">Cliente</a>
 			<ul>
-				<li><a href="{% url 'cadastrar:listarCliente' %}">Listar</a></li>
-				<li><a href="{% url 'servico:adicionarCliente' %}">Cadastrar Equipamento</a></li>
+				<li><a href="{% url 'cadastro:listarCliente' %}">Listar</a></li>
+				<li><a href="{% url 'cadastro:adicionarCliente' %}">Cadastrar Cliente</a></li>
 			</ul>
 		</li>
-		-->
 		
 		<li><a href="/sobre/">Sobre</a></li>
 	</ul>
