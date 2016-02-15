@@ -46,6 +46,16 @@ def editarServico(request, nr_item):
 		context_instance=RequestContext(request))
 
 @login_required
+def removeServico(request, nr_item):
+	servico = get_object_or_404(Servico, pk=nr_item)
+	if request.method == "POST":
+		if form.is_valid():
+			form.delete()
+			return render_to_response("removido.html", {})
+	return render_to_response("servico/remove_servico.html", {'form':form}, 
+		context_instance=RequestContext(request))
+
+@login_required
 def homeEquipamento(request):
 	template_name='servico/inicio_equipamento.html'
 	return render(request, template_name, {})
@@ -85,4 +95,14 @@ def editarEquipamento(request, nr_item):
 		form = FormEquipamento(instance=equipamento)
 	
 	return render_to_response("servico/adicionar_equipamento.html", {'form':form}, 
+		context_instance=RequestContext(request))
+
+@login_required
+def removeEquipamento(request, nr_item):
+	equipamento = get_object_or_404(Equipamento, pk=nr_item)
+	if request.method == "POST":
+		if form.is_valid():
+			form.delete()
+			return render_to_response("removido.html", {})
+	return render_to_response("servico/remove_equipamento.html", {'form':form}, 
 		context_instance=RequestContext(request))

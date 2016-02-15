@@ -1,23 +1,28 @@
 {% extends 'servico/inicio_equipamento.html' %}
 
 {% block corpo %}
-<p>Equipamento</p>
 	{{ block.super }}
+	<p>Equipamento</p>
 <table>
 	<thead>
+		<th>Código</th>
 		<th>Nome</th>
+		<th>Editar</th>
 		<th>Descrição</th>
 	</thead>
 
 	<tbody>
 		{% for equipamento in lista_equipamentos %}
 			<tr>
+				<td>{{ equipamento.id }}</td>
 				<td>{{ equipamento.nome }}</td>
-				<td>{{ equipamento.descricao }}</td>
+				<td><a href="{% url 'servico:editarEquipamento' equipamento.id %} ">Editar</a></td>
 				<td><a href="{% url 'servico:detalheEquipamento' equipamento.id %} ">Detalhes</a></td>
 			</tr>
 		{% empty %}
 			<tr>
+				<td>---</td>
+				<td>---</td>
 				<td>---</td>
 				<td>---</td>
 			</tr>

@@ -2,6 +2,16 @@
 
 {% block corpo %}
 	{{ block.super }}
-	<p>Detalhe Cadastros</p>
+	<p>Detalhe Cadastro</p>
+
+	<p>
+		Username: {{ cadastro.usuario }} <br/>
+		E-mail: {{ cadastro.usuario.email }} <br/>
+		Dara de cadastro: {{ cadastro.usuario.date_joined }}<br/>
+		Nome: {{ cadastro.usuario.get_full_name }} <br/>
+		CPF: {{ cadastro.cpf }} <br/>
+		Tipo: {{ cadastro.get_tipo_display }} <br/>
+		Endereco: {{ cadastro.endereco}} <br/>
+	</p>
 	
 {% endblock %}

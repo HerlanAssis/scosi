@@ -1,0 +1,20 @@
+{% extends 'cadastro/inicio_cliente.html' %}
+
+{% block corpo %}
+	{{ block.super }}
+	<p>Remover</p>
+	<p>
+		<p>
+			Código: {{ cliente.id }} <br/>
+			Nome: {{ cliente.nome }} <br/>
+		</p>
+	</p>
+
+	<form action="" method="post">
+		{% csrf_token %}
+		<p>
+			<button type="submit">Remover</button> ou <a href="{% url 'homeCadastro' %}">Cancelar</a>
+		</p>
+	</form>
+
+{% endblock %}

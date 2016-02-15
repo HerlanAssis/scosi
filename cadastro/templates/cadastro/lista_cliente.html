@@ -6,6 +6,7 @@
 
 <table>
 	<thead>
+		<th>Código</th>
 		<th>Nome</th>
 		<th>Sobrenome</th>
 		<th>Detalhes</th>
@@ -14,12 +15,16 @@
 	<tbody>
 		{% for cliente in lista_clientes %}
 			<tr>
+				<td>{{ cliente.id }}</td>
 				<td>{{ cliente.nome }}</td>
 				<td>{{ cliente.sobrenome }}</td>	
+				<td><a href="{% url 'cadastro:editarCliente' cliente.id %}">Editar</a></td>
 				<td><a href="{% url 'cadastro:detalheCliente' cliente.id %}">Detalhes</a></td>
 			</tr>
 		{% empty %}
 			<tr>
+				<td>---</td>
+				<td>---</td>
 				<td>---</td>
 				<td>---</td>
 				<td>---</td>
