@@ -6,15 +6,18 @@
 
 <table>
 	<thead>
+		<td>---</td>
 		<th>Código</th>
 		<th>Nome</th>
 		<th>Sobrenome</th>
+		<th>Editar</th>
 		<th>Detalhes</th>
 	</thead>
 
 	<tbody>
 		{% for cliente in lista_clientes %}
 			<tr>
+				<td><a href="{% url 'cadastro:removeCliente' cliente.id %}">Exluir</a></td>
 				<td>{{ cliente.id }}</td>
 				<td>{{ cliente.nome }}</td>
 				<td>{{ cliente.sobrenome }}</td>	
@@ -23,6 +26,7 @@
 			</tr>
 		{% empty %}
 			<tr>
+				<td>---</td>
 				<td>---</td>
 				<td>---</td>
 				<td>---</td>

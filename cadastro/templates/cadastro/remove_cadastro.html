@@ -1,19 +1,18 @@
-{% extends 'cadastro/inicio_cliente.html' %}
+{% extends 'cadastro/inicio_cadastro.html' %}
 
 {% block corpo %}
 	{{ block.super }}
-	<p>Remover</p>
+	<p>Remover usuário {{ cadastro.usuario }}?</p>
 	<p>
-		<p>
-			Código: {{ cliente.id }} <br/>
-			Nome: {{ cliente.nome }} <br/>
-		</p>
+		Nome: {{ cadastro.usuario }} <br/>
+		Sobrenome: {{ cliente.sobrenome }} <br/>
+		E-mail: {{ cadastro.usuario.email }} <br/>
 	</p>
 
 	<form action="" method="post">
 		{% csrf_token %}
 		<p>
-			<button type="submit">Remover</button> ou <a href="{% url 'homeCadastro' %}">Cancelar</a>
+			<button type="submit">Remover</button> ou <a href="{% url 'cadastro:homeCadastro' %}">Cancelar</a>
 		</p>
 	</form>
 

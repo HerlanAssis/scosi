@@ -1,12 +1,13 @@
-{% extends 'cadastro/inicio_cliente.html' %}
+{% extends 'servico/inicio_servico.html' %}
 
 {% block corpo %}
 	{{ block.super }}
-	<p>Remover cliente {{ cliente.nome }}?</p>
+	<p>Remover servico Nº {{ servico.id }}?</p>
 	<p>
 		<p>
-			Código: {{ cliente.id }} <br/>
-			Nome: {{ cliente.nome }} <br/>
+			Código: {{ servico.id }} <br/>
+			Descrição: {{ servico.descricao }} <br/>
+			Tipo: {{ servico.get_tipo_display }} <br/>
 		</p>
 	</p>
 

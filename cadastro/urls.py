@@ -1,7 +1,6 @@
 from django.conf.urls import url
-from views import *
-
 from .views import *
+
 
 app_name = 'cadastro'
 

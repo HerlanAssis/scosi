@@ -6,6 +6,7 @@
 
 <table>
 	<thead>
+		<th>---</th>
 		<th>Código</th>
 		<th>Usuário</th>
 		<th>Tipo</th>
@@ -17,6 +18,7 @@
 	<tbody>
 		{% for cadastro in lista_cadastros %}
 			<tr>
+				<td><a href="{% url 'cadastro:removeCadastro' cadastro.id %}">Excluir</a></td>
 				<td>{{ cadastro.id }}</td>
 				<td>{{ cadastro.usuario.get_username }}</td>
 				<td>{{ cadastro.get_tipo_display }}</td>	

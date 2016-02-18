@@ -1,12 +1,12 @@
-{% extends 'cadastro/inicio_cliente.html' %}
+{% extends 'servico/inicio_equipamento.html' %}
 
 {% block corpo %}
 	{{ block.super }}
-	<p>Remover cliente {{ cliente.nome }}?</p>
+	<p>Remover equipamento {{ equipamento.nome }}?</p>
 	<p>
 		<p>
-			Código: {{ cliente.id }} <br/>
-			Nome: {{ cliente.nome }} <br/>
+			Código: {{ equipamento.id }} <br/>
+			Nome: {{ equipamento.nome }} <br/>
 		</p>
 	</p>
 
