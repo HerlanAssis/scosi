@@ -19,7 +19,7 @@
 	<tbody>
 		{% for servico in lista_servicos %}
 			<tr>
-				<td>{{ servico.id }}</td>
+				<td>{{ servico.codigo }}</td>
 				<td>{{ servico.data_de_cadastro|date:"d \d\e F \d\e Y"}}</td>
 				<td>{{ servico.get_tipo_display }}</td>	
 				<td>{{ servico.data_de_inicio }}</td>

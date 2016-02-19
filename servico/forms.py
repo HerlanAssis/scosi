@@ -6,7 +6,7 @@ class FormEquipamento(forms.ModelForm):
 	class Meta:
 		model = Equipamento
 
-		fields = ['nome', 'descricao']
+		fields = ['codigo', 'nome', 'descricao']
 
 class FormServico(forms.ModelForm):
 	class Meta:

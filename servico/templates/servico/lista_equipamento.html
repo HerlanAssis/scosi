@@ -16,7 +16,7 @@
 	<tbody>
 		{% for equipamento in lista_equipamentos %}
 			<tr>
-				<td>{{ equipamento.id }}</td>
+				<td>{{ equipamento.codigo }}</td>
 				<td>{{ equipamento.nome }}</td>
 				<td><a href="{% url 'servico:editarEquipamento' equipamento.id %} ">Editar</a></td>
 				<td><a href="{% url 'servico:detalheEquipamento' equipamento.id %} ">Detalhes</a></td>

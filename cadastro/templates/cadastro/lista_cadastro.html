@@ -20,7 +20,7 @@
 		{% for cadastro in lista_cadastros %}
 			<tr>
 				<td><a href="{% url 'cadastro:removeCadastro' cadastro.id %}">Excluir</a></td>
-				<td>{{ cadastro.id }}</td>
+				<td>{{ cadastro.codigo }}</td>
 				<td>{{ cadastro.nome }}</td>
 				<td>{{ cadastro.get_tipo_display }}</td>	
 				<td>{{ cadastro.dataCadastro|date:"d \d\e F \d\e Y"}}</td>
