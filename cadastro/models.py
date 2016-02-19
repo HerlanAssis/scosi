@@ -9,20 +9,13 @@ from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser,
 from django.contrib.auth.models import User
 from djchoices import DjangoChoices, ChoiceItem
 
-GLOBALPERMISSIONS = (
-	("pode_ver", "Pode ver"),
-	("pode_adicionar", "Pode adicionar"),
-	("pode_editar", "Pode editar"),
-	("pode_excluir", "Pode excluir"),
-)
-
 @python_2_unicode_compatible
 class UF(models.Model):
 	'''
 	Uma Unidade Federativa
 	'''
-	nome = models.CharField(max_length=100)
-	sigla = models.CharField(max_length=3)
+	nome = models.CharField(max_length=100, verbose_name='nome')
+	sigla = models.CharField(max_length=3, verbose_name='sigla')
 
 	def __str__(self):
 		return self.nome
@@ -38,8 +31,8 @@ class Municipio(models.Model):
 	'''
 	Município de uma UF
 	'''
-	nome = models.CharField(max_length=100)
-	uf = models.ForeignKey(UF, verbose_name='UF')
+	nome = models.CharField(max_length=100, verbose_name='nome')
+	uf = models.ForeignKey(UF, verbose_name='UF', on_delete=models.PROTECT)
 
 	def __str__(self):
 		return "%s/%s" % (self.nome, self.uf.sigla)
@@ -72,7 +65,7 @@ class Bairro(models.Model):
 class Logradouro(models.Model):
 
 	nome = models.CharField(max_length=100, verbose_name='logradouro')
-	bairro = models.ForeignKey(Bairro, blank=False)
+	bairro = models.ForeignKey(Bairro, blank=False, on_delete=models.PROTECT)
 
 	def __str__(self):
 		return "%s, %s" % (self.nome, self.bairro)
@@ -113,6 +106,8 @@ class Usuario(AbstractBaseUser, PermissionsMixin, models.Model):
 	cpf = models.BigIntegerField(unique=True, verbose_name='CPF')
 	nome = models.CharField(max_length=30, verbose_name='nome')
 	sobrenome = models.CharField(max_length=30, verbose_name='sobrenome')
+	codigo = models.CharField(max_length=20, unique=True, verbose_name='código',
+		help_text='Ex.: FUN123')
 	email = models.EmailField(blank=True, verbose_name='e-mail')
 	telefone = models.BigIntegerField(blank=True, null=True,
 		verbose_name='telefone')
@@ -130,7 +125,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin, models.Model):
 	_default_manager = UsuarioManager()
 	objects = _default_manager
 	USERNAME_FIELD = 'cpf'
-	REQUIRED_FIELDS = ['nome', 'sobrenome', 'email']
+	REQUIRED_FIELDS = ['nome', 'sobrenome',]
 
 	def __str__(self):
 		return "%s" % self.nome
@@ -177,6 +172,7 @@ class Cliente(models.Model):
 	nome = models.CharField(max_length=30, verbose_name='nome')
 	sobrenome = models.CharField(max_length=30, verbose_name='sobrenome')
 	cpf = models.BigIntegerField(unique=True, verbose_name='CPF')
+	codigo = models.CharField(max_length=20, unique=True, verbose_name='código')
 	endereco = models.ForeignKey(Logradouro, verbose_name='endereço')
 
 	def __str__(self):

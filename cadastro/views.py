@@ -4,12 +4,13 @@ from django.template import RequestContext
 from .forms import *
 from .models import *
 
-@permission_required('cadastro.pode_ver')
 @login_required
 def homeCadastro(request):
 	template_name = 'cadastro/inicio_cadastro.html'
 	return render(request, template_name, {'hello':'hello'})
 
+
+@permission_required('cadastro.add_cadastro', raise_exception=True)
 @login_required
 def adicionarCadastro(request):
 	if request.method == "POST":
@@ -22,17 +23,23 @@ def adicionarCadastro(request):
 	return render_to_response("cadastro/adicionar_cadastro.html", {'form':form}, 
 		context_instance=RequestContext(request))
 
+
+@permission_required('cadastro.change_cadastro', raise_exception=True)
 @login_required
 def listaCadastro(request):
 	lista_cadastro = Usuario.objects.filter(is_superuser=False)
 	template_name = 'cadastro/lista_cadastro.html'
 	return render(request, template_name, {'lista_cadastros':lista_cadastro})
 
+
+@permission_required('cadastro.change_cadastro', raise_exception=True)
 @login_required
 def detalheCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
 	return render_to_response('cadastro/detalhe_cadastro.html', {'cadastro':cadastro})
 
+
+@permission_required('cadastro.change_cadastro', raise_exception=True)
 @login_required
 def editarCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
@@ -47,6 +54,8 @@ def editarCadastro(request, nr_item):
 	return render_to_response("cadastro/adicionar_cadastro.html", {'form':form}, 
 		context_instance=RequestContext(request))
 
+
+@permission_required('cadastro.delete_cadastro', raise_exception=True)
 @login_required
 def removeCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
@@ -56,11 +65,13 @@ def removeCadastro(request, nr_item):
 	return render_to_response("cadastro/remove_cadastro.html", {'cadastro':cadastro}, 
 		context_instance=RequestContext(request))
 
+
 @login_required
 def homeCliente(request):
 	template_name = 'cadastro/inicio_cliente.html'
 	return render(request, template_name, {'hello':'hello'})
 
+@permission_required('cadastro.add_cliente', raise_exception=True)
 @login_required
 def adicionarCliente(request):
 	if request.method == "POST":
@@ -73,17 +84,23 @@ def adicionarCliente(request):
 	return render_to_response("cadastro/adicionar_cliente.html", {'form':form}, 
 		context_instance=RequestContext(request))
 
+
+@permission_required('cadastro.change_cliente', raise_exception=True)
 @login_required
 def listaCliente(request):
 	lista_clientes = Cliente.objects.all()
 	template_name = 'cadastro/lista_cliente.html'
 	return render(request, template_name, {'lista_clientes':lista_clientes})
 
+
+@permission_required('cadastro.change_cliente', raise_exception=True)
 @login_required
 def detalheCliente(request, nr_item):
 	cliente = get_object_or_404(Cliente, pk=nr_item)
 	return render_to_response('cadastro/detalhe_cliente.html', {'detalheCliente':cliente})
 
+
+@permission_required('cadastro.change_cliente', raise_exception=True)
 @login_required
 def editarCliente(request, nr_item):
 	cliente = get_object_or_404(Usuario, pk=nr_item)
@@ -98,6 +115,8 @@ def editarCliente(request, nr_item):
 	return render_to_response("cadastro/adicionar_cliente.html", {'form':form}, 
 		context_instance=RequestContext(request))
 
+
+@permission_required('cadastro.delete_cliente', raise_exception=True)
 @login_required
 def removeCliente(request, nr_item):
 	cliente = get_object_or_404(Cliente, pk=nr_item)

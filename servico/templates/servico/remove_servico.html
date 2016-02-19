@@ -1,14 +1,16 @@
 {% extends 'servico/inicio_servico.html' %}
 
+{% block titulo %}{{block.super}} - Remover{% endblock %}
+
 {% block corpo %}
-	{{ block.super }}
+	<h2 class="subinicioapp">Remover</h2>
+
 	<p>Remover servico Nº {{ servico.id }}?</p>
+	
 	<p>
-		<p>
-			Código: {{ servico.id }} <br/>
-			Descrição: {{ servico.descricao }} <br/>
-			Tipo: {{ servico.get_tipo_display }} <br/>
-		</p>
+		Código: {{ servico.id }} <br/>
+		Descrição: {{ servico.descricao }} <br/>
+		Tipo: {{ servico.get_tipo_display }} <br/>
 	</p>
 
 	<form action="" method="post">

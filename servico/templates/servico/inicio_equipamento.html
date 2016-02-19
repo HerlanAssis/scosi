@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block titulo %}{{block.super}}:Equipamento{% endblock %}
+
 {% block corpo %}
 	{{ block.super }}
+	<h1 class="inicioapp">Equipamento</h1>
 {% endblock %}

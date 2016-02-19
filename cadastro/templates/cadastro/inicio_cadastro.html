@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
+{% block titulo %}{{block.super}}:Cadastros{% endblock %}
+
 {% block corpo %}
 	{{ block.super }}
-<p>Cadastro</p>
+	<h1 class="inicioapp">Cadastros</h1>
 {% endblock %}

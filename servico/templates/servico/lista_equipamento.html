@@ -1,8 +1,10 @@
 {% extends 'servico/inicio_equipamento.html' %}
 
+{% block titulo %}{{block.super}} - Listar{% endblock %}
+
 {% block corpo %}
-	{{ block.super }}
-	<p>Equipamento</p>
+<h2 class="subinicioapp">Listar</h2>
+
 <table>
 	<thead>
 		<th>Código</th>

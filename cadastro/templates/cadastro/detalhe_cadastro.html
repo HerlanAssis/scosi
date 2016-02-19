@@ -1,8 +1,9 @@
 {% extends 'cadastro/inicio_cadastro.html' %}
 
+{% block titulo %}{{block.super}} - Listar{% endblock %}
+
 {% block corpo %}
-	{{ block.super }}
-	<p>Detalhe Cadastro</p>
+	<h2 class="subinicioapp">Listar</h2>
 
 	<p>
 		Username: {{ cadastro.cpf }} <br/>

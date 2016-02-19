@@ -1,9 +1,9 @@
 {% extends 'cadastro/inicio_cliente.html' %}
 
-{% block corpo %}
-	{{ block.super }}
-	<p>Detalhe Cliente</p>
+{% block titulo %}{{block.super}} - Detalhe{% endblock %}
 
+{% block corpo %}
+	<h2 class="subinicioapp">Detalhe</h2>
 	<p>
 		Nome: {{ cliente.nome }} <br/>
 		Sobrenome: {{ cliente.sobrenome }} <br/>

@@ -1,8 +1,9 @@
 {% extends 'servico/inicio_equipamento.html' %}
 
+{% block titulo %}{{block.super}} - Detalhe{% endblock %}
+
 {% block corpo %}
-	{{ block.super }}
-	<p>Detalhe equipamento</p>
+<h2 class="subinicioapp">Detalhe</h2>
 
 	<P>
 		Código: {{ equipamento.id }} <br/>

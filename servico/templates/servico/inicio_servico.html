@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
+{% block titulo %}{{block.super}}:Serviço{% endblock %}
+
 {% block corpo %}
 	{{ block.super }}
+	<h1 class="inicioapp">Serviços</h1>
 
 {% endblock %}

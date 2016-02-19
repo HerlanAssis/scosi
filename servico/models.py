@@ -13,6 +13,7 @@ class Equipamento(models.Model):
 
 	nome = models.CharField(max_length=30, verbose_name='nome')
 	descricao = models.TextField(max_length=300, blank=True, verbose_name='descricao')
+	codigo = models.CharField(max_length=20, unique=True, verbose_name='código')
 
 	def __str__(self):
 		return "%s - %s" % (self.nome, self.descricao)
@@ -43,7 +44,9 @@ class Servico(models.Model):
 	data_de_inicio = models.DateTimeField(default=datetime.now, verbose_name='data de início do serviço')
 	data_de_fim = models.DateTimeField(verbose_name='data de fim do serviço')
 	valor = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='valor do serviço', default=0)
-	tipo = models.CharField(blank=False, max_length=30, choices=TIPO_DE_SERVICO, verbose_name='tipo de serviço', default=INSTALACAO)
+	tipo = models.CharField(blank=False, max_length=30, choices=TIPO_DE_SERVICO,
+		verbose_name='tipo de serviço', default=INSTALACAO)
+	codigo = models.CharField(max_length=20, unique=True, verbose_name='código')
 	
 	#dados do serviço
 	status = models.BooleanField(verbose_name='status', default=False)

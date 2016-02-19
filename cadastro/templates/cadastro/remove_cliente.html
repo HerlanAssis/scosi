@@ -1,7 +1,10 @@
 {% extends 'cadastro/inicio_cliente.html' %}
 
+{% block titulo %}{{block.super}} - Remover{% endblock %}
+
 {% block corpo %}
-	{{ block.super }}
+	<h2 class="subinicioapp">Remover</h2>
+	
 	<p>Remover cliente {{ cliente.nome }}?</p>
 	<p>
 		<p>

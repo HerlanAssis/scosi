@@ -1,8 +1,12 @@
 {% extends 'servico/inicio_equipamento.html' %}
 
+{% block titulo %}{{block.super}} - Remover{% endblock %}
+
 {% block corpo %}
-	{{ block.super }}
+	<h2 class="subinicioapp">Remover</h2>
+	
 	<p>Remover equipamento {{ equipamento.nome }}?</p>
+	
 	<p>
 		<p>
 			Código: {{ equipamento.id }} <br/>
