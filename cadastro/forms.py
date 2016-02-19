@@ -30,7 +30,7 @@ class FormUsuario(forms.ModelForm):
 	class Meta:
 		model = Usuario
 
-		fields = ['usuario', 'cpf', 'tipo', 'endereco']
+		fields = ['cpf', 'tipo', 'telefone', 'nascimento', 'endereco', 'codigo', 'ativo']
 
 class FormCliente(forms.ModelForm):
 	class Meta:

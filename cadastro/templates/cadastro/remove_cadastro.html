@@ -2,11 +2,11 @@
 
 {% block corpo %}
 	{{ block.super }}
-	<p>Remover usuário {{ cadastro.usuario }}?</p>
+	<p>Remover usuário {{ cadastro }}?</p>
 	<p>
-		Nome: {{ cadastro.usuario }} <br/>
-		Sobrenome: {{ cliente.sobrenome }} <br/>
-		E-mail: {{ cadastro.usuario.email }} <br/>
+		Nome: {{ cadastro.nome }} <br/>
+		Sobrenome: {{ cadastro.sobrenome }} <br/>
+		E-mail: {{ cadastro.email }} <br/>
 	</p>
 
 	<form action="" method="post">

@@ -56,12 +56,11 @@ class Servico(models.Model):
 	logradouro = models.ForeignKey(Logradouro, verbose_name='endereço')
 
 	def __str__(self):
-		return "%i: %s-%s" % (self.id, self.data_de_inicio, self.data_de_fim)
+		return "Código %i: Data de início: %s - Data de fim: %s" % (self.id, self.data_de_inicio, self.data_de_fim)
 
 	def funcionarios(self):
 		return Usuario.objects.filter(servico__id=self.id)
 
-	
 	def andamento(self):
 		if self.situacao and self.status:
 			return "Concluido!"
@@ -73,4 +72,4 @@ class Servico(models.Model):
 	class Meta:
 		verbose_name = 'serviço'
 		verbose_name_plural = 'serviços'
-		ordering = ("data_de_cadastro",)
+		ordering = ('data_de_cadastro',)

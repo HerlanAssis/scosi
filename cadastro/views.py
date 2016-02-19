@@ -1,9 +1,10 @@
 from django.shortcuts import render, render_to_response, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
 from .forms import *
 from .models import *
 
+@permission_required('cadastro.pode_ver')
 @login_required
 def homeCadastro(request):
 	template_name = 'cadastro/inicio_cadastro.html'
@@ -23,7 +24,7 @@ def adicionarCadastro(request):
 
 @login_required
 def listaCadastro(request):
-	lista_cadastro = Usuario.objects.all()
+	lista_cadastro = Usuario.objects.filter(is_superuser=False)
 	template_name = 'cadastro/lista_cadastro.html'
 	return render(request, template_name, {'lista_cadastros':lista_cadastro})
 

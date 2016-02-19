@@ -5,13 +5,13 @@
 	<p>Detalhe Cadastro</p>
 
 	<p>
-		Username: {{ cadastro.usuario }} <br/>
-		E-mail: {{ cadastro.usuario.email }} <br/>
-		Dara de cadastro: {{ cadastro.usuario.date_joined }}<br/>
-		Nome: {{ cadastro.usuario.get_full_name }} <br/>
+		Username: {{ cadastro.cpf }} <br/>
+		Nome: {{ cadastro.get_full_name }} <br/>
+		E-mail: {{ cadastro.email }} <br/>
+		Data de cadastro: {{ cadastro.dataCadastro }}<br/>
 		CPF: {{ cadastro.cpf }} <br/>
 		Tipo: {{ cadastro.get_tipo_display }} <br/>
-		Endereco: {{ cadastro.endereco}} <br/>
+		Endereco: {{ cadastro.endereco }} <br/>
 	</p>
 	
 {% endblock %}

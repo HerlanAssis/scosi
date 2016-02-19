@@ -20,9 +20,9 @@
 			<tr>
 				<td><a href="{% url 'cadastro:removeCadastro' cadastro.id %}">Excluir</a></td>
 				<td>{{ cadastro.id }}</td>
-				<td>{{ cadastro.usuario.get_username }}</td>
+				<td>{{ cadastro.nome }}</td>
 				<td>{{ cadastro.get_tipo_display }}</td>	
-				<td>{{ cadastro.usuario.date_joined|date:"d \d\e F \d\e Y"}}</td>
+				<td>{{ cadastro.dataCadastro|date:"d \d\e F \d\e Y"}}</td>
 				<td><a href="{% url 'cadastro:editarCadastro' cadastro.id %}">Editar</a></td>
 				<td><a href="{% url 'cadastro:detalheCadastro' cadastro.id %}">Detalhes</a></td>
 			</tr>
