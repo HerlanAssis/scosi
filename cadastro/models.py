@@ -130,15 +130,16 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 	def __str__(self):
 		return "%s" % self.nome
 
+	
 	def save(self, *args, **kwargs):
+		super(Usuario, self).save(*args, **kwargs)
+		
 		try:
 			group = Group.objects.get(name=self.get_tipo_display())
 			self.groups.clear()
 			self.groups.add(group)
 		except:
 			pass
-
-		return super(Usuario, self).save(*args, **kwargs)
 
 	@property
 	def first_name(self):

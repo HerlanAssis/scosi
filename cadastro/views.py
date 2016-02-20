@@ -7,7 +7,7 @@ from .models import *
 @login_required
 def homeCadastro(request):
 	template_name = 'cadastro/inicio_cadastro.html'
-	return render(request, template_name, {'hello':'hello'})
+	return render(request, template_name, {})
 
 
 @permission_required('cadastro.add_cadastro', raise_exception=True)
@@ -20,8 +20,7 @@ def adicionarCadastro(request):
 			return render_to_response("salvo.html", {})
 	else:
 		form = FormUsuario()
-	return render_to_response("cadastro/adicionar_cadastro.html", {'form':form}, 
-		context_instance=RequestContext(request))
+	return render_to_response("cadastro/adicionar_cadastro.html", {'form':form})
 
 
 @permission_required('cadastro.change_cadastro', raise_exception=True)
@@ -36,7 +35,8 @@ def listaCadastro(request):
 @login_required
 def detalheCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
-	return render_to_response('cadastro/detalhe_cadastro.html', {'cadastro':cadastro})
+	return render_to_response('cadastro/detalhe_cadastro.html',
+		{'cadastro':cadastro})
 
 
 @permission_required('cadastro.change_cadastro', raise_exception=True)
@@ -62,14 +62,14 @@ def removeCadastro(request, nr_item):
 	if request.method == "POST":
 		cadastro.delete()
 		return render_to_response("removido.html", {})
-	return render_to_response("cadastro/remove_cadastro.html", {'cadastro':cadastro}, 
-		context_instance=RequestContext(request))
+	return render_to_response("cadastro/remove_cadastro.html",
+		{'cadastro':cadastro}, context_instance=RequestContext(request))
 
 
 @login_required
 def homeCliente(request):
 	template_name = 'cadastro/inicio_cliente.html'
-	return render(request, template_name, {'hello':'hello'})
+	return render(request, template_name, {})
 
 @permission_required('cadastro.add_cliente', raise_exception=True)
 @login_required
@@ -97,7 +97,8 @@ def listaCliente(request):
 @login_required
 def detalheCliente(request, nr_item):
 	cliente = get_object_or_404(Cliente, pk=nr_item)
-	return render_to_response('cadastro/detalhe_cliente.html', {'detalheCliente':cliente})
+	return render_to_response('cadastro/detalhe_cliente.html',
+		{'detalheCliente':cliente})
 
 
 @permission_required('cadastro.change_cliente', raise_exception=True)

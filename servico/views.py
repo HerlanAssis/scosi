@@ -27,8 +27,11 @@ def adicionarServico(request):
 @permission_required('servico.change_servico', raise_exception=True)
 @login_required
 def listaServico(request):
-	lista_servicos = Servico.objects.all()
-		
+	if request.user.Tipo.Tecnico:
+		lista_servicos = Servico.objects.filter(funcionario=request.user)
+	else:
+		lista_servicos = Servico.objects.all()
+	
 	template_name='servico/lista_servico.html'
 	return render(request, template_name, {'lista_servicos':lista_servicos})
 
