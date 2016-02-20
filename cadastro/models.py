@@ -95,7 +95,7 @@ class UsuarioManager(BaseUserManager):
 
 
 @python_2_unicode_compatible
-class Usuario(AbstractBaseUser, PermissionsMixin, models.Model):   
+class Usuario(AbstractBaseUser, PermissionsMixin):   
 
 	class Tipo(DjangoChoices):
 		''' Possiveis tipos para um usuário '''
