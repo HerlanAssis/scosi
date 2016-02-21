@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 
+{% load bootstrap3 %}
+
+{% block titulo %}{{ block.super }}:Login{% endblock %}
+
 {% block corpo %}
 	{{block.super}}
-	<div>
-	    {% if form.errors %}
-	        {{ form.non_field_erros }}
-	    {% endif %}
-	    <form action="" method="post">{% csrf_token %}
-		    {{ form.as_p }}
-		    <button type="submit">Entrar</button>
-	    </form>
-    </div>
+	{% if form.errors %}
+		{{ form.non_field_erros }}
+	{% endif %}
+	<form action="" method="post" class="form">
+	{% csrf_token %}
+	
+	{% bootstrap_form form %}
+	
+	{% buttons %}
+		<button type="submit" class="btn btn-primary">Entrar</button>
+	{% endbuttons %}
 {% endblock %}

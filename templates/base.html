@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 <head>
 	<title>{% block titulo %}SCOSI{% endblock %}</title>
 	{% block link %}
@@ -14,20 +18,23 @@
 {% include "menu.html" %}
 
 {% block corpo %}
-	<div>
-		{% if user.is_authenticated %}
-			<ul>
-				<li><a href="{% url 'logout' %}">Logout</a></li>
-				<li><a href="{% url 'cadastro:alterar-senha' %}">Alterar Senha</a></li>
-			</ul>
-	    	<p>Bem vindo, {{ user.nome }}.</p>
-		{% else %}
-			<ul>
-				<li><a href="{% url 'login' %}">Login</a></li>
-				<li><a href="{% url 'cadastro:recuperar-senha' %}">Esqueceu a senha?</a></li>
-			</ul>
-	    	<p>Bem vindo. Por favor entre com o seu login para ter acesso as suas funções.</p>
-	    {% endif %}
+    <div class="container">
+    
+    {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+    
+    {% if user.is_authenticated %}
+		<ul>
+			<li><a href="{% url 'logout' %}">Logout</a></li>
+			<li><a href="{% url 'cadastro:alterar-senha' %}">Alterar Senha</a></li>
+		</ul>
+    	<p>Bem vindo, {{ user.nome }}.</p>
+	{% else %}
+		<ul>
+			<li><a href="{% url 'login' %}">Login</a></li>
+			<li><a href="{% url 'cadastro:recuperar-senha' %}">Esqueceu a senha?</a></li>
+		</ul>
+    	<p>Bem vindo. Por favor entre com o seu login para ter acesso as suas funções.</p>
+    {% endif %}
     </div>
 
 {% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="active"><a href="{% url 'home' %}"><i class="fa fa-home"></i> Início</a></li>
+    </ol>
+{% endblock %}
+{% block content %}
+<h1>Acesso negado</h1>
+<p>Você não tem permissão para acessar esse conteúdo.</p>
+{% endblock %}
