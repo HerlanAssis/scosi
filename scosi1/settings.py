@@ -146,4 +146,10 @@ if DEBUG:
     EMAIL_USE_TLS = False
     DEFAULT_FROM_EMAIL = 'testing@example.com'
 else:
-    pass
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'Herlan <herlanassis@gmail.com>'
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = 'herlanassis@gmail.com'
+    EMAIL_HOST_PASSWORD = 'zzjlnhyikuitljrn'
+    EMAIL_PORT = 587

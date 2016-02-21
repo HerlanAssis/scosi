@@ -30,7 +30,7 @@ urlpatterns = [
 	url(r'^recuperar-senha/$', password_reset, 
 		{'post_reset_redirect' : 'cadastro:senha-recuperada'}, name='recuperar-senha'),
 	url(r'^senha-recuperada/$', password_reset_done, name='senha-recuperada'),
-	url(r'^recuperar-senha-email/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm,
+	url(r'^recuperar-senha-email/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$', password_reset_confirm,
 		{'post_reset_redirect' : 'cadastro:senha-email-recuperada'}, name='recuperar-senha-email'),
 	url(r'^senha-email-recuperada/$', password_reset_complete, name='senha-email-recuperada'),
 ]
