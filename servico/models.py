@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 
 #<-- My imports
-from datetime import datetime
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from cadastro.models import Usuario, Cliente, Logradouro
 #My imports -->
@@ -40,8 +40,8 @@ class Servico(models.Model):
 	)
 
 	descricao = models.TextField(max_length=300, verbose_name='descricao')
-	data_de_cadastro = models.DateTimeField(default=datetime.now, editable=False, verbose_name='data de cadastro')
-	data_de_inicio = models.DateTimeField(default=datetime.now, verbose_name='data de início do serviço')
+	data_de_cadastro = models.DateTimeField(default=timezone.now, editable=False, verbose_name='data de cadastro')
+	data_de_inicio = models.DateTimeField(default=timezone.now, verbose_name='data de início do serviço')
 	data_de_fim = models.DateTimeField(verbose_name='data de fim do serviço')
 	valor = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='valor do serviço', default=0)
 	tipo = models.CharField(blank=False, max_length=30, choices=TIPO_DE_SERVICO,

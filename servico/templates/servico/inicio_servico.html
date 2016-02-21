@@ -14,7 +14,8 @@
 		<th>Tipo</th>
 		<th>Data de Início</th>
 		<th>Data de Fim</th>
-		<th>Lista</th>
+		<th>Situação</th>
+		<th>Editar</th>
 		<th>Detalhes</th>
 	</thead>
 
@@ -27,6 +28,7 @@
 				<td>{{ servico.get_tipo_display }}</td>	
 				<td>{{ servico.data_de_inicio }}</td>
 				<td>{{ servico.data_de_fim }}</td>
+				<td>{{ servico.andamento }}</td>
 				<td><a href=" {% url 'servico:editarServico' servico.id %}">Detalhes</a></td>
 				<td><a href=" {% url 'servico:detalheServico' servico.id %}">Detalhes</a></td>
 			</tr>

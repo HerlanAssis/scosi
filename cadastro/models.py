@@ -77,19 +77,19 @@ class Logradouro(models.Model):
 
 
 class UsuarioManager(BaseUserManager):
-	def create_user(self, cpf, nome, sobrenome, tipo, password=None):
+	def create_user(self, cpf, nome, sobrenome, email,tipo, password=None):
 		if not cpf:
 			raise ValueError('Usuários devem possuir CPF')
 
 		superuser = True if tipo == 99 else False
-		user = self.model(cpf=cpf, nome=nome, sobrenome=sobrenome, tipo=tipo,
+		user = self.model(cpf=cpf, nome=nome, sobrenome=sobrenome, email=email,tipo=tipo,
 			is_superuser=superuser)
 		user.set_password(password)
 		user.save(using=self._db)
 		return user
 
-	def create_superuser(self, cpf, nome, sobrenome, password):
-		user = self.create_user(cpf, nome, sobrenome,
+	def create_superuser(self, cpf, nome, sobrenome, email, password):
+		user = self.create_user(cpf, nome, sobrenome, email,
 			99,password=password)
 		return user
 
@@ -125,7 +125,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 	_default_manager = UsuarioManager()
 	objects = _default_manager
 	USERNAME_FIELD = 'cpf'
-	REQUIRED_FIELDS = ['nome', 'sobrenome',]
+	REQUIRED_FIELDS = ['nome', 'sobrenome','email']
 
 	def __str__(self):
 		return "%s" % self.nome

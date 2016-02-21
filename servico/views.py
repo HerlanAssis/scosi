@@ -29,9 +29,10 @@ def adicionarServico(request):
 @login_required
 def listaServico(request):
 	if request.user.Tipo.Tecnico:
-		lista_servicos = Servico.objects.filter(funcionario=request.user)
+		lista_servicos = Servico.objects.filter(
+			funcionario=request.user).filter(situacao=True)
 	else:
-		lista_servicos = Servico.objects.all()
+		lista_servicos = Servico.objects.filter(situacao=True)
 	
 	template_name='servico/lista_servico.html'
 	return render(request, template_name, {'lista_servicos':lista_servicos})
@@ -71,8 +72,12 @@ def removeServico(request, nr_item):
 
 @login_required
 def homeEquipamento(request):
+	total_equipamento = Equipamento.objects.all().count()
+	equipamento_solicidato = Servico.objects.all().filter(equipamento=True).count()
 	template_name='servico/inicio_equipamento.html'
-	return render(request, template_name, {})
+	return render(request, template_name,
+		{'total_equipamento':total_equipamento, 'equipamento_solicidato':equipamento_solicidato},
+		context_instance=RequestContext(request))
 
 
 @permission_required('servico.add_equipamento', raise_exception=True)
