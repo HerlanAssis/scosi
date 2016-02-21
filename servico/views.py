@@ -6,8 +6,9 @@ from .forms import *
 
 @login_required
 def homeServico(request):
+	servico = Servico.objects.filter(situacao=True).filter(status=False)
 	template_name='servico/inicio_servico.html'
-	return render(request, template_name, {})
+	return render(request, template_name, {'servicos_pendentes':servico})
 
 
 @permission_required('servico.add_servico', raise_exception=True)

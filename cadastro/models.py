@@ -118,7 +118,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 	endereco = models.ForeignKey(Logradouro, null=True, verbose_name='endereço')
 	codigo = models.CharField(max_length=20, unique=True,
 		verbose_name='código')
-	ativo = models.BooleanField(default=True, verbose_name='ativo')
+	is_active = models.BooleanField(default=True, verbose_name='ativo')
 	tipo = models.PositiveIntegerField(choices=Tipo.choices, 
 		default=Tipo.Tecnico, verbose_name='tipo de usuário')
 
@@ -159,9 +159,9 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 	def is_staff(self):
 		return self.is_superuser or self.tipo == 99
 
-	@property
-	def is_active(self):
-		return self.ativo
+	'''@property
+				def is_active(self):
+					return self.ativo'''
 
 	class Meta:
 		verbose_name = 'usuário'

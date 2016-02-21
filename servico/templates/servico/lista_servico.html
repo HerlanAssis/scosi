@@ -7,6 +7,7 @@
 
 <table>
 	<thead>
+		<th>Excluir</th>
 		<th>Código</th>
 		<th>Data de inclusão</th>
 		<th>Tipo</th>
@@ -19,6 +20,7 @@
 	<tbody>
 		{% for servico in lista_servicos %}
 			<tr>
+				<td><a href=" {% url 'servico:removeServico' servico.id %}">Detalhes
 				<td>{{ servico.codigo }}</td>
 				<td>{{ servico.data_de_cadastro|date:"d \d\e F \d\e Y"}}</td>
 				<td>{{ servico.get_tipo_display }}</td>	
@@ -29,6 +31,7 @@
 			</tr>
 		{% empty %}
 			<tr>
+				<td>---</td>
 				<td>---</td>
 				<td>---</td>
 				<td>---</td>

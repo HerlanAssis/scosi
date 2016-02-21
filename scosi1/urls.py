@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from django.contrib.auth.views import (login, logout_then_login,
-    password_change, password_change_done)
+from django.contrib.auth.views import login, logout_then_login
 from django.contrib.flatpages import views
 
 from views import home
@@ -29,9 +28,6 @@ urlpatterns = [
     url(r'^cadastro/', include('cadastro.urls', 'cadastro')),
     url(r'^servico/', include('servico.urls', 'servico')),
 
-    url(r'^login/', login, {'template_name':'login.html'}, name='login'),
+    url(r'^login/', login, name='login'),
     url(r'^logout/', logout_then_login, {'login_url':'/'}, name='logout'),
-    
-    url(r'^alterar-senha/$', password_change, name='mudarSenha'),
-    url(r'^senha-alterada/$', password_change_done, name='senhaAlterada'),
 ]
