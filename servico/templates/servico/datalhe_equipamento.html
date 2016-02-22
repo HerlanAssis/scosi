@@ -3,6 +3,7 @@
 {% block titulo %}{{block.super}} - Detalhe{% endblock %}
 
 {% block corpo %}
+<div class="container">
 <h2 class="subinicioapp">Detalhe</h2>
 
 	<P>
@@ -10,5 +11,6 @@
 		Nome: {{ equipamento.nome }} <br/>
 		Descrição: {{ equipamento.descricao }}
 	</P>
+</div>
 
 {% endblock %}

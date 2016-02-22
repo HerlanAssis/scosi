@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html>
 
-{% load bootstrap3 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
+{# Load the tag library #}
 
 <head>
 	<title>{% block titulo %}SCOSI{% endblock %}</title>
 	{% block link %}
-		{% load staticfiles %}
-		<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Sisteda de Cadastro e Controle de Orde de Serviço de instalação">
+    <meta name="author" content="Holocron IFRN">
+	{% load staticfiles %}
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
+		<link rel="stylesheet" href="{% static 'css/sticky-footer-navbar.css' %}">
+		<link href="{% static 'css/navbar.css' %}" rel="stylesheet">
+	{# Load CSS and JavaScript #}
+	{% load bootstrap3 %}
+	{% bootstrap_css %}
+	{% bootstrap_javascript %}
 	{% endblock %}
 	<meta charset="UTF-8"/>
 </head>
@@ -20,23 +28,10 @@
 {% block corpo %}
     <div class="container">
     
+	{# Display django.contrib.messages as Bootstrap alerts #}
     {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
     
-    {% if user.is_authenticated %}
-		<ul>
-			<li><a href="{% url 'logout' %}">Logout</a></li>
-			<li><a href="{% url 'cadastro:alterar-senha' %}">Alterar Senha</a></li>
-		</ul>
-    	<p>Bem vindo, {{ user.nome }}.</p>
-	{% else %}
-		<ul>
-			<li><a href="{% url 'login' %}">Login</a></li>
-			<li><a href="{% url 'cadastro:recuperar-senha' %}">Esqueceu a senha?</a></li>
-		</ul>
-    	<p>Bem vindo. Por favor entre com o seu login para ter acesso as suas funções.</p>
-    {% endif %}
     </div>
-
 {% endblock %}
 
 {% include "rodape.html" %}

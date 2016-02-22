@@ -3,6 +3,8 @@
 {% block titulo %}{{block.super}} - Listar{% endblock %}
 
 {% block corpo %}
+
+	<div class="container">
 	<h2 class="subinicioapp">Listar</h2>
 
 	<p>
@@ -14,5 +16,6 @@
 		Tipo: {{ cadastro.get_tipo_display }} <br/>
 		Endereco: {{ cadastro.endereco }} <br/>
 	</p>
+	</div>
 	
 {% endblock %}

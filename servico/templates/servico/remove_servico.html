@@ -3,6 +3,7 @@
 {% block titulo %}{{block.super}} - Remover{% endblock %}
 
 {% block corpo %}
+<div class="container">
 	<h2 class="subinicioapp">Remover</h2>
 
 	<p>Remover servico Nº {{ servico.codigo }}?</p>
@@ -19,5 +20,6 @@
 			<button type="submit">Remover</button> ou <a href="{% url 'cadastro:homeCliente' %}">Cancelar</a>
 		</p>
 	</form>
+</div>
 
 {% endblock %}

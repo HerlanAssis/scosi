@@ -22,7 +22,7 @@ urlpatterns = [
 	url(r'^cliente/remove/(?P<nr_item>\d+)/$', removeCliente, name='removeCliente'),
 
 	url(r'^alterar-senha/$', password_change,
-		{'template_name': 'password_change_form.html', 'post_change_redirect':'cadastro:senha-alterada'},
+		{'template_name': 'registration/password_change_form.html', 'post_change_redirect':'cadastro:senha-alterada'},
 		name='alterar-senha'),
 	url(r'^senha-alterada/$', password_change_done,	
 		{'template_name': 'password_change_done.html'},

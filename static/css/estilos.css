@@ -1,0 +1,26 @@
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 0px;
+}
+h1 {
+	font-size: 18pt;
+}
+
+.breadcrumb {
+	background-color: transparent;
+}
+
+.table>tbody>tr>td {
+	vertical-align: middle;
+}
+
+.no-margin {
+	margin: 0px;
+}
+
+.form-group.required .control-label:after { 
+    color: #d00;
+    content: "*";
+    position: absolute;
+    margin-left: 8px;
+    top:7px;
+}

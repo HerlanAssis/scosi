@@ -71,6 +71,8 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.static',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -129,7 +131,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = 'staticfiles'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
@@ -137,6 +145,7 @@ LOGIN_REDIRECT_URL = '/'
 SITE_ID = 1
 
 AUTH_USER_MODEL = 'cadastro.Usuario'
+ADMIN_MEDIA_PREFIX = '/media_admin/'
 
 if DEBUG:
     EMAIL_HOST = 'localhost'

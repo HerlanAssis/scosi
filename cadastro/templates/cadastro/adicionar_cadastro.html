@@ -3,9 +3,11 @@
 {% block titulo %}{{block.super}} - Adicionar{% endblock %}
 
 {% block corpo %}
-	<h2 class="subinicioapp">Adicionar</h2>
-	<form action="" method="post"> {% csrf_token %}
-		{{ form.as_p }}
-		<button type="submit">Enviar</button>
-	</form>
+	<div class="container">
+		<h2 class="subinicioapp">Adicionar</h2>
+		<form action="" method="post"> {% csrf_token %}
+			{{ form.as_p }}
+			<button type="submit">Enviar</button>
+		</form>
+	</div>
 {% endblock %}

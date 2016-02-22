@@ -1,5 +1,3 @@
-{% load bootstrap3 %}
-
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -17,7 +15,7 @@
 				<li><a href="{% url 'home' %}">Início</a></li>
 
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuários<span class="caret"></span></a>
+					<a href="{% url 'cadastro:homeCadastro' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuários<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="{% url 'cadastro:listarCadastro' %}">Listar Usuários</a></li>
 						<li><a href="{% url 'cadastro:adicionarCadastro' %}">Cadastrar Usuários</a></li>
@@ -41,9 +39,8 @@
 				</li>
 
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes<span class="caret"></span></a>
+					<a href="{% url 'cadastro:homeCliente' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="{% url 'cadastro:homeCliente' %}">Home</a></li>
 						<li><a href="{% url 'cadastro:listarCliente' %}">Listar Clientes</a></li>
 						<li><a href="{% url 'cadastro:adicionarCliente' %}">Cadastrar Clientes</a></li>
 					</ul>
