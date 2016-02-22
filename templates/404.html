@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
-{% block content %}
-<h1>Página não encontrada</h1>
-<p>A página que você procura não foi encontrada.</p>
+
+{% block titulo %}{{block.super}}: - Página não encontrada{% endblock %}
+
+{% block corpo %}
+<div class="content">
+	<h1>Página não encontrada</h1>
+	<p>A página que você procura não foi encontrada.</p>
+</div>
 {% endblock %}
