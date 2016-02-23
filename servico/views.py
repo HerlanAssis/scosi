@@ -77,10 +77,10 @@ def removeServico(request, nr_item):
 @login_required
 def homeEquipamento(request):
 	total_equipamento = Equipamento.objects.all().count()
-	equipamento_solicidato = Servico.objects.all().filter(equipamento=True).count()
+	equipamento_solicidato = Servico.objects.filter(equipamento=True).count()
 	template_name='servico/inicio_equipamento.html'
 	return render(request, template_name,
-		{'total_equipamento':total_equipamento, 'equipamento_solicidato':equipamento_solicidato},
+		{'total_equipamento':total_equipamento, 'equipamento_solicitado':equipamento_solicidato},
 		context_instance=RequestContext(request))
 
 

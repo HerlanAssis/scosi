@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block titulo %}{{flatpage.title}}{% endblock %}
-{% block conteudo %}
+{% block corpo %}
 <article>
     <header>
-        <h2>{{flatpage.title|safe}}</h2>
+        <h2 style="text-align: center;">{{flatpage.title|safe}}</h2>
     </header>
-    <div>
+    <div class="container">
     	<p>{{flatpage.content|linebreaks}}</p>
     </div>
 </article>
