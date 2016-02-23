@@ -1,13 +1,23 @@
 {% extends 'cadastro/inicio_cliente.html' %}
 
-{% block titulo %}{{block.super}} - Adicionar{% endblock %}
+{% load bootstrap3 %}
+
+{% block titulo %}{{block.super}} - Adicionar Cliente{% endblock %}
 
 {% block corpo %}
-	<div class="container">
-		<h2 class="subinicioapp">Adicionar</h2>
-		<form action="" method="post"> {% csrf_token %}
-			{{ form.as_p }}
-			<button type="submit">Enviar</button>
-		</form>
+<div class="col-md-6 col-md-offset-3">
+	<div class="login-panel panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title" style="text-align: center;">Adicionar Cliente</h3>
+		</div>
+		<div class="panel-body">
+			<fieldset>
+				<form action="" method="post"> {% csrf_token %}
+					{% bootstrap_form form layout="vertical" %}
+					<button type="submit" class="btn btn-lg btn-primary btn-block">Cadastrar</button>
+				</form>
+			</fieldset>
+		</div>	
 	</div>
+</div>
 {% endblock %}

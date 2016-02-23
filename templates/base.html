@@ -28,13 +28,12 @@
 {% block corpo %}
     <div class="container">
     
-	{# Display django.contrib.messages as Bootstrap alerts #}
-    {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+		{# Display django.contrib.messages as Bootstrap alerts #}
+    	{% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
     
     </div>
 {% endblock %}
-
-{% include "rodape.html" %}
+	
 </body>
 
 </html>

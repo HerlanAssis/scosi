@@ -8,7 +8,8 @@ from .forms import *
 def homeServico(request):
 	servico = Servico.objects.filter(situacao=True).filter(status=False)
 	template_name='servico/inicio_servico.html'
-	return render(request, template_name, {'servicos_pendentes':servico})
+	return render(request, template_name, {'servicos_pendentes':servico},
+		context_instance=RequestContext(request))
 
 
 @permission_required('servico.add_servico', raise_exception=True)
@@ -18,7 +19,8 @@ def adicionarServico(request):
 		form = FormServico(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
-			return render_to_response("salvo.html", {})
+			return render_to_response("salvo.html", {},
+				context_instance=RequestContext(request))
 	else:
 		form = FormServico()
 	return render_to_response("servico/adicionar_servico.html", {'form':form}, 
@@ -28,21 +30,23 @@ def adicionarServico(request):
 @permission_required('servico.change_servico', raise_exception=True)
 @login_required
 def listaServico(request):
-	if request.user.Tipo.Tecnico:
+	if not request.user.Tipo.Tecnico:
 		lista_servicos = Servico.objects.filter(
-			funcionario=request.user).filter(situacao=True)
+		funcionario=request.user).filter(situacao=True)
 	else:
 		lista_servicos = Servico.objects.filter(situacao=True)
 	
 	template_name='servico/lista_servico.html'
-	return render(request, template_name, {'lista_servicos':lista_servicos})
+	return render(request, template_name, {'lista_servicos':lista_servicos},
+		context_instance=RequestContext(request))
 
 
 @permission_required('servico.change_servico', raise_exception=True)
 @login_required
 def detalheServico(request, nr_item):
 	servico = get_object_or_404(Servico, pk=nr_item)
-	return render_to_response('servico/detalhe_servico.html', {'servico':servico})
+	return render_to_response('servico/detalhe_servico.html', 
+		{'servico':servico}, context_instance=RequestContext(request))
 
 
 @permission_required('servico.change_servico', raise_exception=True)
@@ -53,7 +57,7 @@ def editarServico(request, nr_item):
 		form = FormServico(request.POST, request.FILES, instance=servico)
 		if form.is_valid():
 			form.save()
-			return render_to_response("salvo.html", {})
+			return render_to_response("salvo.html", {}, context_instance=RequestContext(request))
 	else:
 		form = FormServico(instance=servico)
 	return render_to_response("servico/adicionar_servico.html", {'form':form}, 
@@ -99,14 +103,16 @@ def adicionarEquipamento(request):
 def listaEquipamento(request):
 	lista_equipamento = Equipamento.objects.all()
 	template_name='servico/lista_equipamento.html'
-	return render(request, template_name, {'lista_equipamentos':lista_equipamento})
+	return render(request, template_name, {'lista_equipamentos':lista_equipamento},
+		context_instance=RequestContext(request))
 
 
 @permission_required('servico.change_equipamento', raise_exception=True)
 @login_required
 def detalheEquipamento(request, nr_item):
 	equipamento = get_object_or_404(Equipamento, pk=nr_item)
-	return render_to_response('servico/datalhe_equipamento.html', {'equipamento':equipamento})
+	return render_to_response('servico/datalhe_equipamento.html', {'equipamento':equipamento},
+		context_instance=RequestContext(request))
 
 
 @permission_required('servico.change_equipamento', raise_exception=True)
@@ -117,7 +123,7 @@ def editarEquipamento(request, nr_item):
 		form = FormEquipamento(request.POST, request.FILES, instance=equipamento)
 		if form.is_valid():
 			form.save()
-			return render_to_response("salvo.html", {})
+			return render_to_response("salvo.html", {},context_instance=RequestContext(request))
 	else:
 		form = FormEquipamento(instance=equipamento)
 	

@@ -1,16 +1,28 @@
 {% extends 'servico/inicio_equipamento.html' %}
 
-{% block titulo %}{{block.super}} - Detalhe{% endblock %}
+{% block titulo %}{{block.super}} - Detalhe Equipamento{% endblock %}
 
 {% block corpo %}
-<div class="container">
-<h2 class="subinicioapp">Detalhe</h2>
+{% block actions-buttons %}
+</div>
+	<div class="btn-group">
+	<a class="btn btn-warning" href="{% url 'servico:editarEquipamento' equipamento.id %}">Editar</a>
+	<a class="btn btn-danger" href="{% url 'servico:removeEquipamento' equipamento.id %}">Excluir</a>
+</div>
+{% endblock %}
 
-	<P>
-		Código: {{ equipamento.codigo }} <br/>
-		Nome: {{ equipamento.nome }} <br/>
-		Descrição: {{ equipamento.descricao }}
-	</P>
+<div class="panel panel-default">
+	<h1 style="text-align: center;">Detalhe - {{ equipamento.nome }}</h1>
+    <div class="panel-body form-horizontal">
+		<label class="col-md-2 control-label">Código:</label>
+		<div class="col-md-4 form-control-static">{{ equipamento.codigo }}</div>
+
+		<label class="col-md-2 control-label">Nome:</label>
+		<div class="col-md-4 form-control-static">{{ equipamento.nome }}</div>
+
+		<label class="col-md-2 control-label">Descrição:</label>
+		<div class="col-md-4 form-control-static">{{ equipamento.descricao }}</div>
+	</div>
 </div>
 
 {% endblock %}

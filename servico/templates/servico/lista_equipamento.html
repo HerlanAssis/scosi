@@ -4,34 +4,40 @@
 
 {% block corpo %}
 <div class="container">
-<h2 class="subinicioapp">Listar</h2>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1 class="panel-title" style="text-align: center;">Usuários</h1>
+		</div>
+			<table class="table table-hover">
+				<thead>
+					<th>Excluir</th>
+					<th>Código</th>
+					<th>Nome</th>
+					<th>Editar</th>
+					<th>Descrição</th>
+				</thead>
 
-<table>
-	<thead>
-		<th>Código</th>
-		<th>Nome</th>
-		<th>Editar</th>
-		<th>Descrição</th>
-	</thead>
-
-	<tbody>
-		{% for equipamento in lista_equipamentos %}
-			<tr>
-				<td>{{ equipamento.codigo }}</td>
-				<td>{{ equipamento.nome }}</td>
-				<td><a href="{% url 'servico:editarEquipamento' equipamento.id %} ">Editar</a></td>
-				<td><a href="{% url 'servico:detalheEquipamento' equipamento.id %} ">Detalhes</a></td>
-			</tr>
-		{% empty %}
-			<tr>
-				<td>---</td>
-				<td>---</td>
-				<td>---</td>
-				<td>---</td>
-			</tr>
-		{% endfor %}
-	</tbody>
-</table>
-
+				<tbody>
+					{% for equipamento in lista_equipamentos %}
+						<tr>
+							<td><a class="btn btn-danger" href="{% url 'servico:removeEquipamento' equipamento.id %} ">Excluir</a></td>
+							<td>{{ equipamento.codigo }}</td>
+							<td>{{ equipamento.nome }}</td>
+							<td><a class="btn btn-warning" href="{% url 'servico:editarEquipamento' equipamento.id %} ">Editar</a></td>
+							<td><a class="btn btn-primary" href="{% url 'servico:detalheEquipamento' equipamento.id %} ">Detalhes</a></td>
+						</tr>
+					{% empty %}
+						<tr>
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 {% endblock %}

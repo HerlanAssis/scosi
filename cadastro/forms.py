@@ -167,5 +167,4 @@ class FormCliente(forms.ModelForm):
 			return int(value)
 	class Meta:
 		model = Cliente
-		
 		fields = ['nome', 'sobrenome', 'codigo', 'cpf', 'endereco']

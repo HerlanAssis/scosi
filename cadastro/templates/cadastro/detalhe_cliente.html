@@ -3,15 +3,32 @@
 {% block titulo %}{{block.super}} - Detalhe{% endblock %}
 
 {% block corpo %}
-	<div class="container">
-	<h2 class="subinicioapp">Detalhe</h2>
-	<p>
-		Nome: {{ cliente.nome }} <br/>
-		Código: {{ cliente.codigo }} <br/>
-		Sobrenome: {{ cliente.sobrenome }} <br/>
-		CPF: {{ cliente.cpf }} <br/>
-		Endereço: {{ cliente.endereco }} <br/>
-	</p>
+{% block actions-buttons %}
+</div>
+	<div class="btn-group">
+	<a class="btn btn-warning" href="{% url 'cadastro:editarCliente' cliente.id %}">Editar</a>
+	<a class="btn btn-danger" href="{% url 'cadastro:removeCliente' cliente.id %}">Excluir</a>
+</div>
+{% endblock %}
+
+<div class="panel panel-default">
+	<h1 style="text-align: center;">Detalhe - {{ cliente.nome }}</h1>
+    <div class="panel-body form-horizontal">
+		<label class="col-md-2 control-label">Nome:</label>
+		<div class="col-md-4 form-control-static">{{ cliente.nome }}</div>
+
+		<label class="col-md-2 control-label">CPF:</label>
+		<div class="col-md-4 form-control-static">{{ cliente.cpf }}</div>
+
+		<label class="col-md-2 control-label">Código:</label>
+		<div class="col-md-4 form-control-static">{{ cliente.codigo }}</div>
+
+		<label class="col-md-2 control-label">Sobrenome:</label>
+		<div class="col-md-4 form-control-static">{{ cliente.sobrenome }}</div>
+
+		<label class="col-md-2 control-label">Endereço:</label>
+		<div class="col-md-4 form-control-static">{{ cliente.endereco }}</div>
 	</div>
+</div>
 	
 {% endblock %}

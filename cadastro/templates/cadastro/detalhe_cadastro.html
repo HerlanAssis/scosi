@@ -3,19 +3,37 @@
 {% block titulo %}{{block.super}} - Listar{% endblock %}
 
 {% block corpo %}
-
-	<div class="container">
-	<h2 class="subinicioapp">Listar</h2>
-
-	<p>
-		Username: {{ cadastro.cpf }} <br/>
-		Código: {{ cadastro.codigo }} <br/>
-		Nome completo: {{ cadastro.get_full_name }} <br/>
-		E-mail: {{ cadastro.email }} <br/>
-		Data de cadastro: {{ cadastro.dataCadastro }}<br/>
-		Tipo: {{ cadastro.get_tipo_display }} <br/>
-		Endereco: {{ cadastro.endereco }} <br/>
-	</p>
+{% block actions-buttons %}
+</div>
+	<div class="btn-group">
+	<a class="btn btn-warning" href="{% url 'cadastro:editarCadastro' cadastro.id %}">Editar</a>
+	<a class="btn btn-danger" href="{% url 'cadastro:removeCadastro' cadastro.id %}">Excluir</a>
 	</div>
+{% endblock %}
+
+<div class="panel panel-default">
+	<h1 style="text-align: center;">Detalhe - {{ cadastro.nome }}</h1>
+    <div class="panel-body form-horizontal">
+	<label class="col-md-2 control-label">Username:</label>
+	<div class="col-md-4 form-control-static">{{ cadastro.cpf }}</div>
+
+	<label class="col-md-2 control-label">Código:</label>
+	<div class="col-md-4 form-control-static">{{ cadastro.codigo }}</div>
+
+	<label class="col-md-2 control-label">Nome Completo:</label>
+	<div class="col-md-4 form-control-static">{{ cadastro.get_full_name }}</div>
+
+	<label class="col-md-2 control-label">E-mail:</label>
+	<div class="col-md-4 form-control-static">{{ cadastro.email }}</div>
+
+	<label class="col-md-2 control-label">Data de Cadastro:</label>
+	<div class="col-md-4 form-control-static">{{ cadastro.dataCadastro }}</div>
+
+	<label class="col-md-2 control-label">Tipo:</label>
+	<div class="col-md-4 form-control-static">{{ cadastro.get_tipo_display }}</div>
+
+	<label class="col-md-2 control-label">Endereço:</label>
+	<div class="col-md-4 form-control-static">{{ cadastro.endereco }}</div>
+</div>
 	
 {% endblock %}

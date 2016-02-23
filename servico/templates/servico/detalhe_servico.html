@@ -3,39 +3,69 @@
 {% block titulo %}{{block.super}} - Detalhe{% endblock %}
 
 {% block corpo %}
+{% block actions-buttons %}
+</div>
+	<div class="btn-group">
+	<a class="btn btn-warning" href="{% url 'servico:editarServico' servico.id %}">Editar</a>
+	<a class="btn btn-danger" href="{% url 'servico:removeServico' servico.id %}">Excluir</a>
+</div>
+{% endblock %}
+
+<div class="panel panel-default">
+	<h1 style="text-align: center;">Detalhe - Serviço:{{ servico.codigo }}</h1>
+    <div class="panel-body form-horizontal">
+		<label class="col-md-2 control-label">Código:</label>
+		<div class="col-md-4 form-control-static">{{ servico.codigo }}</div>
+
+		<label class="col-md-2 control-label">Data de cadastro:</label>
+		<div class="col-md-4 form-control-static">{{ servico.data_de_cadastro }}</div>
+
+		<label class="col-md-2 control-label">Tipo de Serviço:</label>
+		<div class="col-md-4 form-control-static">{{ servico.get_tipo_display }}</div>
+		
+		<label class="col-md-2 control-label">Data de início:</label>
+		<div class="col-md-4 form-control-static">{{ servico.data_de_inicio }}</div>
+
+		<label class="col-md-2 control-label">Data de fim:</label>
+		<div class="col-md-4 form-control-static">{{ servico.data_de_fim }}</div>
+
+		<label class="col-md-2 control-label">Valor cobrado:</label>
+		<div class="col-md-4 form-control-static">R$ {{ servico.valor }}</div>
+
+		<label class="col-md-2 control-label">Andamento do serviço:</label>
+		<div class="col-md-4 form-control-static">{{ servico.andamento }}</div>
+
+		<label class="col-md-2 control-label">Equipamento:</label>
+		<div class="col-md-4 form-control-static">{{ servico.equipamento }}</div>
+
+		<label class="col-md-2 control-label">Cliente:</label>
+		<div class="col-md-4 form-control-static"><a href="{% url 'cadastro:detalheCliente' servico.cliente_id %}">{{ servico.cliente }}</a></div>
+
+		<label class="col-md-2 control-label">Endereço:</label>
+		<div class="col-md-4 form-control-static">{{ servico.endereco }}</div>
+		
+
+</div>
+
 <div class="container">
-<h2 class="subinicioapp">Detalhe</h2>
-
-	<p>
-		Código: {{ servico.codigo }} <br/>
-		Data de cadastro: {{ servico.data_de_cadastro }} <br/>
-		Tipo do serviço: {{ servico.get_tipo_display }} <br/>
-		Data de início do serviço: {{ servico.data_de_inicio }} <br/>
-		Data de fim do serviço: {{ servico.data_de_dim }} <br/>
-		Valor cobrado: R$ {{ servico.valor }} <br/>
-		Andamento do servico: {{ servico.andamento }} <br/>
-
-		<table>
-		<thead>
-			<th colspan="2">Funcionarios</th>
-		</thead>
-		<tbody>
-			<tr>
-				<td>Nome</td>
-				<td>Detalhes</td>
-			</tr>
-			{% for funcionario in servico.funcionarios %}
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1 class="panel-title" style="text-align: center;">Funcionários envolvidos</h1>
+		</div>
+		<table class="table table-hover">
+			<tbody>
 				<tr>
-					<td>{{ funcionario }}</td>
-					<td><a href="{% url 'cadastro:detalheCadastro' funcionario.id %}">Detalhes</a></td>
+					<td>Nome</td>
+					<td>Detalhes</td>
 				</tr>
-			{% endfor %}
-		</tbody>
+				{% for funcionario in servico.funcionarios %}
+					<tr>
+						<td>{{ funcionario }}</td>
+						<td><a class="btn btn-primary" href="{% url 'cadastro:detalheCadastro' funcionario.id %}">Detalhes</a></td>
+					</tr>
+				{% endfor %}
+			</tbody>
 		</table>
-		Cliente: <a href="{% url 'cadastro:detalheCliente' servico.cliente_id %}">{{ servico.cliente }} </a><br/>
-		Equipamento: <a href="{% url 'servico:detalheEquipamento' servico.equipamento_id %}">{{ servico.equipamento }} </a><br/>
-		Endereço: <a href="#">{{ servico.logradouro }} </a><br/>
-
-	</p>
+	</div>
 </div>
 {% endblock %}
