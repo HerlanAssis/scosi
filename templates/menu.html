@@ -15,24 +15,27 @@
 				<li><a href="{% url 'home' %}">Início</a></li>
 
 				<li class="dropdown">
-					<a href="{% url 'cadastro:homeCadastro' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuários<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuários<span class="caret"></span></a>
 					<ul class="dropdown-menu">
+						<li><a href="{% url 'cadastro:homeCadastro' %}">Home Usuários</a></li>
 						<li><a href="{% url 'cadastro:listarCadastro' %}">Listar Usuários</a></li>
 						<li><a href="{% url 'cadastro:adicionarCadastro' %}">Cadastrar Usuários</a></li>
 					</ul>
 				</li>
 
 				<li class="dropdown">
-					<a href="{% url 'servico:homeServico' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Serviços<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Serviços<span class="caret"></span></a>
 					<ul class="dropdown-menu">
+						<li><a href="{% url 'servico:homeServico' %}">Home Serviços</a></li>
 						<li><a href="{% url 'servico:listarServico' %}">Listar Serviços</a></li>
 						<li><a href="{% url 'servico:adicionarServico' %}">Cadastrar Serviços</a></li>
 					</ul>
 				</li>
 
 				<li class="dropdown">
-					<a href="{% url 'servico:homeEquipamento' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Equipamentos <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Equipamentos <span class="caret"></span></a>
 					<ul class="dropdown-menu">
+						<li><a href="{% url 'servico:homeEquipamento' %}">Home Equipamentos</a></li>
 						<li><a href="{% url 'servico:listarEquipamento' %}">Listar Equipamentos</a></li>
 						<li><a href="{% url 'servico:adicionarEquipamento' %}">Cadastrar Equipamentos</a></li>
 						</ul>
@@ -41,6 +44,7 @@
 				<li class="dropdown">
 					<a href="{% url 'cadastro:homeCliente' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes<span class="caret"></span></a>
 					<ul class="dropdown-menu">
+						<li><a href="{% url 'cadastro:homeCliente' %}">Home Clientes</a></li>
 						<li><a href="{% url 'cadastro:listarCliente' %}">Listar Clientes</a></li>
 						<li><a href="{% url 'cadastro:adicionarCliente' %}">Cadastrar Clientes</a></li>
 					</ul>
@@ -60,8 +64,10 @@
 					<li><a href="{% url 'cadastro:alterar-senha' %}">Alterar Senha</a></li>
 				</ul>
 				{% else %}
-				<a href="{% url 'login' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login<span class="caret"></span></a>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Entrar<span class="caret"></span></a>
 				<ul class="dropdown-menu">
+					
+				<li><a href="{% url 'login' %}">Login</a></li>
 					<li><a href="{% url 'cadastro:recuperar-senha' %}">Esqueceu a senha?</a></li>
 				</ul>
 			{% endif %}
