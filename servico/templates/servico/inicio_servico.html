@@ -5,50 +5,61 @@
 {% block titulo %}{{block.super}}:Serviço{% endblock %}
 
 {% block corpo %}
-	{{ block.super }}
 	<div class="container">
-	<h1 class="inicioapp">Serviços</h1>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1 class="panel-title" style="text-align: center;">Serviços Pendentes</h1>
+		</div>
+			<table class="table table-hover">
+				<thead>
+					<th>Excluir</th>
+					<th>Código</th>
+					<th>Tipo</th>
+					<th>Data de Fim</th>
+					<th>Situação</th>					
+					<th>Cliente</th>
+					<th>Endereço</th>
+					<th>Editar</th>
+					<th>Detalhes</th>
+				</thead>
 
-	<table>
-	<thead>
-		<th>Excluir</th>
-		<th>Código</th>
-		<th>Data de inclusão</th>
-		<th>Tipo</th>
-		<th>Data de Início</th>
-		<th>Data de Fim</th>
-		<th>Situação</th>
-		<th>Editar</th>
-		<th>Detalhes</th>
-	</thead>
+				<tbody>
+					{% for servico in servicos_pendentes %}
+						<tr>
+							<td><a class="btn btn-danger" href="{% url 'servico:removeServico' servico.id %}">Excluir</a>
+							</td>
+							
+							<td>{{ servico.codigo }}</td>
+							
+							<td>{{ servico.get_tipo_display }}</td>	
+							<td>{{ servico.data_de_fim }}</td>
+							<td>{{ servico.andamento }}</td>	
+							
+							<td><a href=" {% url 'cadastro:detalheCliente' servico.cliente_id %}">{{servico.cliente}}</a></td>
 
-	<tbody>
-		{% for servico in servicos_pendentes %}
-			<tr>
-				<td><a href=" {% url 'servico:removeServico' servico.id %}">Detalhes
-				<td>{{ servico.codigo }}</td>
-				<td>{{ servico.data_de_cadastro|date:"d \d\e F \d\e Y"}}</td>
-				<td>{{ servico.get_tipo_display }}</td>	
-				<td>{{ servico.data_de_inicio }}</td>
-				<td>{{ servico.data_de_fim }}</td>
-				<td>{{ servico.andamento }}</td>
-				<td><a href=" {% url 'servico:editarServico' servico.id %}">Detalhes</a></td>
-				<td><a href=" {% url 'servico:detalheServico' servico.id %}">Detalhes</a></td>
-			</tr>
-		{% empty %}
-			<tr>
-				<td>---</td>
-				<td>---</td>
-				<td>---</td>
-				<td>---</td>
-				<td>---</td>
-				<td>---</td>
-				<td>---</td>
-				<td>---</td>
-			</tr>
-		{% endfor %}
-	</tbody>
-</table>
+							<td>{{servico.logradouro}}</td>
 
+							<td><a class="btn btn-warning" href=" {% url 'servico:editarServico' servico.id %}">Editar</a></td>
+							
+							<td><a class="btn btn-primary" href=" {% url 'servico:detalheServico' servico.id %}">Detalhes</a></td>
+						</tr>
+					{% empty %}
+						<tr>							
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+							<td>---</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 {% endblock %}

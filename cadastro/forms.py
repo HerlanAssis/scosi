@@ -80,29 +80,11 @@ class CPFInput(BRCPFInput):
 			value = re.sub("[-\. ]", "", value)
 		return value
 
-class FormUF(forms.ModelForm):
+class FormEndereco(forms.ModelForm):
 	class Meta:
-		model = UF
+		model = Endereco
 
-		fields = ['nome', 'sigla']
-
-class FormMunicipio(forms.ModelForm):
-	class Meta:
-		model = Municipio
-
-		fields = ['nome', 'uf']
-
-class FormBairro(forms.ModelForm):
-	class Meta:
-		model = Bairro
-
-		fields = ['nome', 'municipio']
-
-class FormLogradouro(forms.ModelForm):
-	class Meta:
-		model = Logradouro
-
-		fields = ['nome', 'bairro']
+		fields = '__all__'
 
 class FormUsuario(forms.ModelForm):
 	error_messages = {
@@ -151,8 +133,8 @@ class FormUsuario(forms.ModelForm):
 	class Meta:
 		model = Usuario
 
-		fields = ['cpf', 'tipo', 'nome', 'sobrenome', 'email',
-		'telefone', 'nascimento', 'endereco', 'codigo',]
+		fields = ['cpf', 'nome', 'sobrenome', 'tipo', 'codigo', 'email', 'telefone',
+		'nascimento', 'endereco',]
 
 class FormCliente(forms.ModelForm):
 	cpf = BRCPFField(widget=CPFInput, label='CPF')
@@ -167,4 +149,4 @@ class FormCliente(forms.ModelForm):
 			return int(value)
 	class Meta:
 		model = Cliente
-		fields = ['nome', 'sobrenome', 'codigo', 'cpf', 'endereco']
+		fields = '__all__'

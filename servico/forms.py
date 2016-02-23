@@ -14,7 +14,7 @@ class FormServico(forms.ModelForm):
 		model = Servico
 
 		fields = ['tipo', 'codigo', 'data_de_inicio', 'data_de_fim', 'descricao', 
-		'valor', 'status', 'situacao', 'funcionario', 'cliente', 'equipamento', 'logradouro']
+		'valor', 'status', 'situacao', 'funcionario', 'cliente', 'equipamento', 'endereco']
 		
 		widgets = {
 			'data_de_inicio': forms.SelectDateWidget,

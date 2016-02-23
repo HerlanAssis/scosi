@@ -3,23 +3,23 @@
 {% block titulo %}{{block.super}} - Remover{% endblock %}
 
 {% block corpo %}
-<div class="container">
-	<h2 class="subinicioapp">Remover</h2>
-	
-	<p>Remover cliente {{ cliente.nome }}?</p>
-	<p>
+
+<form method="post">{% csrf_token %}
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        Remover cliente {{ cliente.nome }}?
+    </div>
+    <div class="panel-body">
+        <p>Deseja realmente excluir o cliente <strong>{{ cliente.nome }}</strong>?</p>
+    </div>
+    <div class="panel-footer">		
 		<p>
 			Código: {{ cliente.codigo }} <br/>
 			Nome: {{ cliente.nome }} <br/>
-		</p>
-	</p>
-
-	<form action="" method="post">
-		{% csrf_token %}
-		<p>
-			<button type="submit">Remover</button> ou <a href="{% url 'cadastro:homeCliente' %}">Cancelar</a>
-		</p>
-	</form>
+		</p>		
+        <a class="btn btn-default" href="{% url 'cadastro:homeCliente' %}">Cancelar</a>
+        <button class="btn btn-danger pull-right" type="submit">Excluir {{ cliente.nome }}</button>
+    </div>
 </div>
-
+</form>
 {% endblock %}

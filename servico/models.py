@@ -5,7 +5,7 @@ from django.db import models
 #<-- My imports
 from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
-from cadastro.models import Usuario, Cliente, Logradouro
+from cadastro.models import Usuario, Cliente, Endereco
 #My imports -->
 
 @python_2_unicode_compatible
@@ -54,9 +54,12 @@ class Servico(models.Model):
 
 	#relações
 	funcionario = models.ManyToManyField(Usuario, verbose_name='funcionário')
-	cliente = models.ForeignKey(Cliente, verbose_name='cliente')
-	equipamento = models.ForeignKey(Equipamento, blank=True, null=True, verbose_name='equipamento')
-	logradouro = models.ForeignKey(Logradouro, verbose_name='endereço')
+	cliente = models.ForeignKey(Cliente, verbose_name='cliente',
+		on_delete=models.PROTECT)
+	equipamento = models.ForeignKey(Equipamento, blank=True, null=True,
+		verbose_name='equipamento', on_delete=models.PROTECT)
+	endereco = models.ForeignKey(Endereco, verbose_name='endereço',
+		on_delete=models.PROTECT)
 
 	def __str__(self):
 		return "Código %i: Data de início: %s - Data de fim: %s" % (self.id, self.data_de_inicio, self.data_de_fim)

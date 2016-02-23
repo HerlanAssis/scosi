@@ -21,9 +21,9 @@ Secretaria_permissions = (
 	'cadastro.change_bairro',
 	'cadastro.delete_bairro',
 
-	'cadastro.add_logradouro',
-	'cadastro.change_logradouro',
-	'cadastro.delete_logradouro',
+	'cadastro.add_endereco',
+	'cadastro.change_endereco',
+	'cadastro.delete_endereco',
 
 	'cadastro.add_usuario',
 	'cadastro.change_usuario',
@@ -49,9 +49,9 @@ Supervisor_permissions = (
 	'cadastro.change_bairro',
 	'cadastro.delete_bairro',
 
-	'cadastro.add_logradouro',
-	'cadastro.change_logradouro',
-	'cadastro.delete_logradouro',
+	'cadastro.add_endereco',
+	'cadastro.change_endereco',
+	'cadastro.delete_endereco',
 
 	'cadastro.add_usuario',
 	'cadastro.change_usuario',

@@ -1,5 +1,4 @@
 #! -*- encoding: utf-8 -*-
-
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
@@ -8,73 +7,31 @@ from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser,
 	PermissionsMixin, Group)
 from django.contrib.auth.models import User
 from djchoices import DjangoChoices, ChoiceItem
+from localflavor.br.br_states import STATE_CHOICES
 
-@python_2_unicode_compatible
-class UF(models.Model):
-	'''
-	Uma Unidade Federativa
-	'''
-	nome = models.CharField(max_length=100, verbose_name='nome')
-	sigla = models.CharField(max_length=3, verbose_name='sigla')
 
-	def __str__(self):
-		return self.nome
+class Endereco(models.Model):
+	TIPO_LOGRADOURO_CHOICES = (
+		('rua', 'Rua'),
+		('avenida', 'Avenida'),
+		('travessa', 'Travessa'),
+	)
 
+	endereco_tipo_logradouro = models.CharField(max_length=10, choices=TIPO_LOGRADOURO_CHOICES, verbose_name='Tipo Logradouro')
+	endereco_logradouro = models.CharField(max_length=80, verbose_name='Logradouro')
+	endereco_numero = models.IntegerField(verbose_name='Número')
+	endereco_complemento = models.CharField(max_length=45, blank=True, verbose_name='Complemento')
+	endereco_bairro = models.CharField(max_length=80, verbose_name='Bairro')
+	endereco_cidade = models.CharField(max_length=80, verbose_name='Cidade')
+	endereco_estado = models.CharField(max_length=2, choices=STATE_CHOICES, verbose_name='Estado')
+	endereco_cep = models.CharField(max_length=9, blank=True, verbose_name='CEP')
+	
+	def __unicode__(self):
+		return '%s %s, %s, %s, %s - %s' % (self.endereco_tipo_logradouro, self.endereco_logradouro, self.endereco_numero, self.endereco_bairro, self.endereco_cidade, self.endereco_estado)
 	class Meta:
-		verbose_name = 'estado'
-		verbose_name_plural = 'estados'
-		ordering = ('nome',)
-
-
-@python_2_unicode_compatible
-class Municipio(models.Model):
-	'''
-	Município de uma UF
-	'''
-	nome = models.CharField(max_length=100, verbose_name='nome')
-	uf = models.ForeignKey(UF, verbose_name='UF', on_delete=models.PROTECT)
-
-	def __str__(self):
-		return "%s/%s" % (self.nome, self.uf.sigla)
-
-	class Meta:
-		verbose_name = 'município'
-		verbose_name_plural = 'municípios'
-		ordering = ('nome',)
-
-
-@python_2_unicode_compatible
-class Bairro(models.Model):
-	'''
-	Bairro de um município
-	'''
-	nome = models.CharField(max_length=100, verbose_name='nome')
-	municipio = models.ForeignKey(Municipio, related_name='bairros', 
-		verbose_name='município', on_delete=models.PROTECT)
-
-	def __str__(self):
-		return "%s - %s" % (self.nome, self.municipio)
-
-	class Meta:
-		verbose_name = 'bairro'
-		verbose_name_plural = 'bairros'
-		ordering = ('nome',)
-
-
-@python_2_unicode_compatible
-class Logradouro(models.Model):
-
-	nome = models.CharField(max_length=100, verbose_name='logradouro')
-	bairro = models.ForeignKey(Bairro, blank=False, on_delete=models.PROTECT)
-
-	def __str__(self):
-		return "%s, %s" % (self.nome, self.bairro)
-
-	class Meta:
-		verbose_name = 'logradouro'
-		verbose_name_plural = 'logradouros'
-		ordering = ('bairro', 'nome',)
-
+		verbose_name = 'Endereço'
+		verbose_name_plural = 'Endereços'
+		ordering = ['endereco_tipo_logradouro']
 
 class UsuarioManager(BaseUserManager):
 	def create_user(self, cpf, nome, sobrenome, email,tipo, password=None):
@@ -115,9 +72,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 		verbose_name='data de nasc.')
 	dataCadastro = models.DateTimeField(verbose_name='data de cadastro',
 		default=timezone.now)
-	endereco = models.ForeignKey(Logradouro, null=True, verbose_name='endereço')
-	codigo = models.CharField(max_length=20, unique=True,
-		verbose_name='código')
+	endereco = models.ForeignKey(Endereco, null=True, verbose_name='endereço')
 	is_active = models.BooleanField(default=True, verbose_name='ativo')
 	tipo = models.PositiveIntegerField(choices=Tipo.choices, 
 		default=Tipo.Tecnico, verbose_name='tipo de usuário')
@@ -170,15 +125,28 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
 @python_2_unicode_compatible
 class Cliente(models.Model):
+	SEXO_CHOICES = (
+		('masculino', 'Masculino'),
+		('feminino', 'Feminino'),
+	)
+	ESTADO_CIVIL_CHOICES = (
+		('solteiro', 'Solteiro'),
+		('casado', 'Casado'),
+		('divorciado', 'Divorciado'),
+		('viuvo', 'Viúvo'),
+	)
+
 	nome = models.CharField(max_length=30, verbose_name='nome')
 	sobrenome = models.CharField(max_length=30, verbose_name='sobrenome')
+	sexo = models.CharField(max_length=10, choices=SEXO_CHOICES, verbose_name='sexo')
+	estado_civil = models.CharField(max_length=10, choices=ESTADO_CIVIL_CHOICES, verbose_name='estado civil')
 	cpf = models.BigIntegerField(unique=True, verbose_name='CPF')
 	codigo = models.CharField(max_length=20, unique=True, verbose_name='código')
-	endereco = models.ForeignKey(Logradouro, verbose_name='endereço')
+	endereco = models.ForeignKey(Endereco, verbose_name='endereço', on_delete=models.PROTECT)
 
 	def __str__(self):
-		return "%s" % self.nome
+		return "%s %s" % (self.nome, self.sobrenome)
 
 	class Meta:
-		verbose_name = 'cliente'
-		verbose_name_plural = 'clientes'
+		verbose_name = 'Cliente'
+		verbose_name_plural = 'Clientes'

@@ -3,8 +3,13 @@
 {% block titulo %}{{block.super}}:Cadastros{% endblock %}
 
 {% block corpo %}
-	{{ block.super }}
-	<div class="container">
-		<h1 class="inicioapp">Cadastros</h1>
+	<div class="col-md-6 col-md-offset-3">
+		<h1>
+		Relações de usuários ativos do sistema
+		</h1>
+		<h2>Total de Usuários cadastrados: {{ usuarios.count }}</h2>
+		<h2>Total de Supervisores: {{ supervisores.count }}</h2>
+		<h2>Total de Secretárias: {{ secretarios.count }}</h2>
+		<h2>Total de Tecnicos: {{ tecnicos.count }}</h2>
 	</div>
 {% endblock %}

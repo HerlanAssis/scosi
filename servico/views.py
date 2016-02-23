@@ -30,7 +30,7 @@ def adicionarServico(request):
 @permission_required('servico.change_servico', raise_exception=True)
 @login_required
 def listaServico(request):
-	if not request.user.Tipo.Tecnico:
+	if request.user.Tipo.Tecnico and not request.user.is_staff:
 		lista_servicos = Servico.objects.filter(
 		funcionario=request.user).filter(situacao=True)
 	else:

@@ -3,11 +3,29 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
 from .forms import *
 from .models import *
+from servico.models import Servico
 
 @login_required
 def homeCadastro(request):
+	usuarios = Usuario.objects.filter(
+		is_superuser=False).filter(is_active=True)
+	supervisores = Usuario.objects.filter(
+		is_superuser=False).filter(is_active=True).filter(tipo=1)
+	secretarios = Usuario.objects.filter(
+		is_superuser=False).filter(is_active=True).filter(tipo=2)
+	tecnicos = Usuario.objects.filter(
+		is_superuser=False).filter(is_active=True).filter(tipo=3)
+	
+	context = {
+		'usuarios':usuarios,
+		'supervisores':supervisores,
+		'secretarios':secretarios,
+		'tecnicos':tecnicos,
+	}
+
 	template_name = 'cadastro/inicio_cadastro.html'
-	return render(request, template_name, {}, context_instance=RequestContext(request))
+
+	return render(request, template_name, context, context_instance=RequestContext(request))
 
 @permission_required('cadastro.add_cadastro', raise_exception=True)
 @login_required
@@ -69,8 +87,26 @@ def removeCadastro(request, nr_item):
 
 @login_required
 def homeCliente(request):
+	total_clientes = Cliente.objects.all().count()
+	total_servicos = Servico.objects.all().count()
+	total_servicos_concluidos = Servico.objects.filter(
+		situacao=True).filter(status=True).count()
+	total_servicos_cancelados = Servico.objects.filter(
+		situacao=False).count()
+	total_servicos_pendentes = Servico.objects.filter(
+		situacao=True).filter(status=False).count()
+
+	context = {
+		'total_clientes' : total_clientes,
+		'total_servicos' : total_servicos,
+		'total_servicos_concluidos' : total_servicos_concluidos,
+		'total_servicos_cancelados' : total_servicos_cancelados,
+		'total_servicos_pendentes' : total_servicos_pendentes,
+	}
+
 	template_name = 'cadastro/inicio_cliente.html'
-	return render(request, template_name, {}, context_instance=RequestContext(request))
+	return render(request, template_name, context,
+		context_instance=RequestContext(request))
 
 @permission_required('cadastro.add_cliente', raise_exception=True)
 @login_required
