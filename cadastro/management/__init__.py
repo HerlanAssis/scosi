@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.management import create_permissions
-from scosi1.permissions import GROUP_PERMISSIONS
+from scosi.permissions import GROUP_PERMISSIONS
 from ..models import Usuario
 
 

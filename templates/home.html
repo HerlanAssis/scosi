@@ -1,6 +1,103 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 
+{% block Titulo %}{{block.super}}:Home{% endblock %}
+
 {% block corpo %}
-	{{ block.super }}
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h1 class="panel-title" style="text-align: center;">Ultimas adições - Clientes</h1>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<th>Código</th>
+			<th>Nome</th>
+			<th>Sobrenome</th>
+			<th>Detalhes</th>
+		</thead>
+
+		<tbody>
+			{% for cliente in todos_clientes %}
+				<tr>										
+					<td>{{ cliente.codigo }}</td>
+					<td>{{ cliente.nome }}</td>									
+					<td>{{ cliente.sobrenome }}</td>									
+					<td>
+						<a class="btn btn-primary" href="{% url 'cadastro:detalheCliente' cliente.id %}">Detalhes</a>
+					</td>
+				</tr>
+			{% empty %}
+				<tr>
+					<td>---</td>
+					<td>---</td>
+					<td>---</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h1 class="panel-title">Ultimas adições - Usuários</h1>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<th>Código</th>
+			<th>Usuário</th>
+			<th>Tipo</th>
+			<th>Detalhes</th>
+		</thead>
+
+		<tbody>
+			{% for cadastro in todos_usuarios %}
+				<tr>
+					<td>{{ cadastro.codigo }}</td>
+					<td>{{ cadastro.nome }}</td>
+					<td>{{ cadastro.get_tipo_display }}</td>	
+					<td><a class="btn btn-primary" href="{% url 'cadastro:detalheCadastro' cadastro.id %}">Detalhes</a></td>
+				</tr>
+			{% empty %}
+				<tr>
+					<td>---</td>
+					<td>---</td>
+					<td>---</td>
+					<td>---</td>					
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h1 class="panel-title" >Ultimas Adições - Serviços</h1>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<th>Código</th>				
+			<th>Tipo</th>
+			<th>Data de Fim</th>
+			<th>Detalhes</th>
+		</thead>
+
+		<tbody>
+			{% for servico in todos_servicos %}
+				<tr>												
+					<td>{{ servico.codigo }}</td>						
+					<td>{{ servico.get_tipo_display }}</td>	
+					<td>{{ servico.data_de_fim }}</td>					
+					<td><a class="btn btn-primary" href=" {% url 'servico:detalheServico' servico.id %}">Detalhes</a></td>
+				</tr>
+			{% empty %}
+				<tr>
+					<td>---</td>
+					<td>---</td>
+					<td>---</td>
+					<td>---</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
 {% endblock %}

@@ -14,7 +14,7 @@ class FormServico(forms.ModelForm):
 		model = Servico
 
 		fields = ['tipo', 'codigo', 'data_de_inicio', 'data_de_fim', 'descricao', 
-		'valor', 'status', 'situacao', 'funcionario', 'cliente', 'equipamento', 'endereco']
+		'valor', 'status', 'situacao', 'funcionario', 'cliente', 'equipamento',]
 		
 		widgets = {
 			'data_de_inicio': forms.SelectDateWidget,
@@ -25,4 +25,4 @@ class FormServico(forms.ModelForm):
 		super(FormServico, self).__init__(*args, **kwargs)
 		if self.instance:
 			self.fields['funcionario'].queryset = Usuario.objects.filter(
-				is_superuser=False)
+				tipo=3)
