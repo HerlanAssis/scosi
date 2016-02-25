@@ -8,7 +8,7 @@
 	{% block link %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sisteda de Cadastro e Controle de Orde de Serviço de instalação">
+    <meta name="description" content="Sistema de Controle de Ordem de Serviço de Instalação">
     <meta name="author" content="Holocron IFRN">
 	{% load staticfiles %}
 		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
@@ -28,13 +28,13 @@
 
 {% block corpo %}
     <div class="container">
-    
+
 		{# Display django.contrib.messages as Bootstrap alerts #}
     	{% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
-    
+
     </div>
 {% endblock %}
-	
+
 </body>
 
 {% include "rodape.html" %}
