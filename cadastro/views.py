@@ -165,7 +165,7 @@ def detalheCliente(request, nr_item):
 @permission_required('cadastro.change_cliente', raise_exception=True)
 @login_required
 def editarCliente(request, nr_item):
-	cliente = get_object_or_404(Usuario, pk=nr_item)
+	cliente = get_object_or_404(Cliente, pk=nr_item)
 	if request.method == "POST":
 		form = FormCliente(request.POST, request.FILES, instance=cliente)
 		formEnd = FormEndereco(request.POST, request.FILES, instance=cliente.endereco)
