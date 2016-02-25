@@ -33,7 +33,8 @@ def adicionarServico(request):
 
 			cad.save()
 			form.save_m2m()
-			return render_to_response("salvo.html", {})
+			return render_to_response("salvo.html", {},
+				context_instance=RequestContext(request))
 	else:
 		form = FormServico()
 		formEndereco = FormEndereco()
@@ -78,7 +79,8 @@ def editarServico(request, nr_item):
 			cad.endereco = end
 			cad.save()
 			form.save_m2m()
-			return render_to_response("salvo.html", {}, context_instance=RequestContext(request))
+			return render_to_response("salvo.html", {},
+				context_instance=RequestContext(request))
 	else:
 		form = FormServico(instance=servico)
 		formEnd = FormEndereco(instance=servico.endereco)
@@ -92,7 +94,8 @@ def removeServico(request, nr_item):
 	servico = get_object_or_404(Servico, pk=nr_item)
 	if request.method == "POST":
 		servico.delete()
-		return render_to_response("removido.html", {})
+		return render_to_response("removido.html", {},
+			context_instance=RequestContext(request))
 	return render_to_response("servico/remove_servico.html", {'servico':servico}, 
 		context_instance=RequestContext(request))
 
@@ -113,7 +116,8 @@ def adicionarEquipamento(request):
 		form = FormEquipamento(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
-			return render_to_response("salvo.html", {})
+			return render_to_response("salvo.html", {},
+				context_instance=RequestContext(request))
 	else:
 		form = FormEquipamento()
 	return render_to_response("servico/adicionar_equipamento.html", {'form':form}, 
