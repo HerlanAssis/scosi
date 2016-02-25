@@ -10,7 +10,7 @@ from cadastro.forms import FormEndereco
 def homeServico(request):
 	if request.user.tipo == Usuario.Tipo.Tecnico:
 		servico = Servico.objects.filter(
-		funcionario=request.user).filter(situacao=True)
+		funcionario=request.user).filter(situacao=True).filter(status=False)
 	else:
 		servico = Servico.objects.filter(situacao=True).filter(status=False)
 	
