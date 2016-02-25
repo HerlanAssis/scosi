@@ -2,11 +2,16 @@
 from cadastro.models import Usuario
 
 Tecnico_permissions = (
+	'cadastro.add_endereco',
+	'cadastro.change_endereco',
+	'cadastro.delete_endereco',
+	
 	'servico.add_equipamento',
 	'servico.change_equipamento',
 	'servico.delete_equipamento',
 	
 	'servico.change_servico',
+
 )
 
 Secretario_permissions = (
@@ -14,9 +19,6 @@ Secretario_permissions = (
 	'cadastro.add_endereco',
 	'cadastro.change_endereco',
 	'cadastro.delete_endereco',
-
-	'cadastro.add_usuario',
-	'cadastro.change_usuario',
 
 	'cadastro.add_cliente',
 	'cadastro.change_cliente',
