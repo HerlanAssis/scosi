@@ -9,7 +9,7 @@ Tecnico_permissions = (
 	'servico.change_servico',
 )
 
-Secretaria_permissions = (
+Secretario_permissions = (
 
 	'cadastro.add_endereco',
 	'cadastro.change_endereco',
@@ -17,6 +17,9 @@ Secretaria_permissions = (
 
 	'cadastro.add_usuario',
 	'cadastro.change_usuario',
+
+	'cadastro.add_cliente',
+	'cadastro.change_cliente',
 
 	'servico.add_equipamento',
 	'servico.change_equipamento',
@@ -54,6 +57,6 @@ Administrador_permissions = tuple(Supervisor_permissions + (
 
 GROUP_PERMISSIONS = {
     Usuario.Tipo.Supervisor: Administrador_permissions,
-    Usuario.Tipo.Secretario: Secretaria_permissions,
+    Usuario.Tipo.Secretario: Secretario_permissions,
     Usuario.Tipo.Tecnico: Tecnico_permissions,
 }
