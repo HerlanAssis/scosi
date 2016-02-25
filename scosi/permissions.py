@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from cadastro.models import Usuario
 
 Tecnico_permissions = (

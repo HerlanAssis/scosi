@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django import forms
 
 from cadastro.models import Usuario
@@ -19,10 +20,11 @@ class FormServico(forms.ModelForm):
 		widgets = {
 			'data_de_inicio': forms.SelectDateWidget,
 			'data_de_fim': forms.SelectDateWidget,
+			'funcionario' : forms.CheckboxSelectMultiple(),
 		}
 
-	def __init__(self, *args, **kwargs):
-		super(FormServico, self).__init__(*args, **kwargs)
-		if self.instance:
-			self.fields['funcionario'].queryset = Usuario.objects.filter(
-				tipo=3)
+		def __init__(self, *args, **kwargs):
+			super(FormServico, self).__init__(*args, **kwargs)
+			if self.instance:
+				self.fields['funcionario'].queryset = Usuario.objects.filter(
+					tipo=3)

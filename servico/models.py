@@ -1,4 +1,4 @@
-#! -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
 
@@ -13,7 +13,7 @@ class Equipamento(models.Model):
 
 	nome = models.CharField(max_length=30, verbose_name='nome')
 	descricao = models.TextField(max_length=300, blank=True, verbose_name='descricao')
-	codigo = models.CharField(max_length=20, unique=True, verbose_name='código')
+	codigo = models.CharField(max_length=20, unique=True, verbose_name=u'código')
 
 	def __str__(self):
 		return "%s - %s" % (self.nome, self.descricao)
@@ -24,7 +24,7 @@ class Equipamento(models.Model):
 		ordering = ("nome",)
 
 
-@python_2_unicode_compatible
+#@python_2_unicode_compatible
 class Servico(models.Model):
 
 	INSTALACAO = 'INS'
@@ -46,11 +46,11 @@ class Servico(models.Model):
 	valor = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='valor do serviço', default=0)
 	tipo = models.CharField(blank=False, max_length=30, choices=TIPO_DE_SERVICO,
 		verbose_name='tipo de serviço', default=INSTALACAO)
-	codigo = models.CharField(max_length=20, unique=True, verbose_name='código')
+	codigo = models.CharField(max_length=20, unique=True, verbose_name=u'código')
 	
 	#dados do serviço
-	status = models.BooleanField(verbose_name='status', default=False)
-	situacao = models.BooleanField(verbose_name='situação', default=True)
+	status = models.BooleanField(verbose_name='concluido', default=False)
+	situacao = models.BooleanField(verbose_name='ativo', default=True)
 
 	#relações
 	funcionario = models.ManyToManyField(Usuario, verbose_name='funcionário')
@@ -62,7 +62,7 @@ class Servico(models.Model):
 		on_delete=models.PROTECT)
 
 	def __str__(self):
-		return "Código %i: Data de início: %s - Data de fim: %s" % (self.id, self.data_de_inicio, self.data_de_fim)
+		return "Código: %s" % (self.codigo)
 
 	def funcionarios(self):
 		return Usuario.objects.filter(servico__id=self.id)

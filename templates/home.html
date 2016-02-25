@@ -6,96 +6,93 @@
 {% block corpo %}
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h1 class="panel-title" style="text-align: center;">Ultimas adições - Clientes</h1>
+		<h1 class="panel-title">Ultimas adições</h1>
 	</div>
 	<table class="table table-hover">
 		<thead>
-			<th>Código</th>
-			<th>Nome</th>
-			<th>Sobrenome</th>
-			<th>Detalhes</th>
+			<tr>
+				<th>Opções</th>
+				<th>Códido</th>
+				<th>Nome</th>
+				<th>Espeficicação</th>
+			</tr>
 		</thead>
-
-		<tbody>
-			{% for cliente in todos_clientes %}
-				<tr>										
-					<td>{{ cliente.codigo }}</td>
-					<td>{{ cliente.nome }}</td>									
-					<td>{{ cliente.sobrenome }}</td>									
-					<td>
-						<a class="btn btn-primary" href="{% url 'cadastro:detalheCliente' cliente.id %}">Detalhes</a>
-					</td>
-				</tr>
-			{% empty %}
-				<tr>
-					<td>---</td>
-					<td>---</td>
-					<td>---</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-</div>
-
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h1 class="panel-title">Ultimas adições - Usuários</h1>
-	</div>
-	<table class="table table-hover">
-		<thead>
-			<th>Código</th>
-			<th>Usuário</th>
-			<th>Tipo</th>
-			<th>Detalhes</th>
-		</thead>
-
+		
 		<tbody>
 			{% for cadastro in todos_usuarios %}
-				<tr>
-					<td>{{ cadastro.codigo }}</td>
-					<td>{{ cadastro.nome }}</td>
-					<td>{{ cadastro.get_tipo_display }}</td>	
-					<td><a class="btn btn-primary" href="{% url 'cadastro:detalheCadastro' cadastro.id %}">Detalhes</a></td>
-				</tr>
-			{% empty %}
-				<tr>
-					<td>---</td>
-					<td>---</td>
-					<td>---</td>
-					<td>---</td>					
-				</tr>
+			<tr>
+				<td>
+					<div class="btn-group">
+						<button type="button" class="btn btn-danger">Detalhes</button>
+						<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{% url 'cadastro:detalheCadastro' cadastro.id %}">Detalhes</a></li>
+							<li><a href="{% url 'cadastro:editarCadastro' cadastro.id %}">Editar</a></li>
+							<li><a href="{% url 'cadastro:removeCadastro' cadastro.id %}">Deletar</a></li>
+							<li class="divider"></li>
+							<li><a href="{% url 'cadastro:homeCadastro' %}">Visitar Home</a></li>
+						</ul>
+					</div>
+				</td>
+
+			<td>{{ cadastro.codigo }}</td>
+			<td>{{ cadastro.nome }}</td>
+			<td><strong>Usuário</strong>:{{ cadastro.get_tipo_display }}</td>
+			</tr>
 			{% endfor %}
-		</tbody>
-	</table>
-</div>
-
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h1 class="panel-title" >Ultimas Adições - Serviços</h1>
-	</div>
-	<table class="table table-hover">
-		<thead>
-			<th>Código</th>				
-			<th>Tipo</th>
-			<th>Data de Fim</th>
-			<th>Detalhes</th>
-		</thead>
-
-		<tbody>
+			
+			{% for cliente in todos_clientes %}
+			<tr>
+				<td>
+					<div class="btn-group">
+						<button type="button" class="btn btn-danger">Detalhes</button>
+						<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{% url 'cadastro:detalheCliente' cliente.id %}">Detalhes</a></li>
+							<li><a href="{% url 'cadastro:editarCliente' cliente.id %}">Editar</a></li>
+							<li><a href="{% url 'cadastro:removeCliente' cliente.id %}">Deletar</a></li>
+							<li class="divider"></li>
+							<li><a href="{% url 'cadastro:homeCliente' %}">Visitar Home</a></li>
+						</ul>
+					</div>
+				</td>
+				
+				<td>{{ cliente.codigo }}</td>
+				<td>{{ cliente.nome }}</td>								
+				<td><strong>Cliente: </strong>{{ cliente.cpf }}</td>
+			</tr>
+			{% endfor %}
+			
 			{% for servico in todos_servicos %}
-				<tr>												
-					<td>{{ servico.codigo }}</td>						
-					<td>{{ servico.get_tipo_display }}</td>	
-					<td>{{ servico.data_de_fim }}</td>					
-					<td><a class="btn btn-primary" href=" {% url 'servico:detalheServico' servico.id %}">Detalhes</a></td>
-				</tr>
-			{% empty %}
-				<tr>
-					<td>---</td>
-					<td>---</td>
-					<td>---</td>
-					<td>---</td>
-				</tr>
+			<tr>
+				<td>			
+					<div class="btn-group">
+						<button type="button" class="btn btn-danger">Detalhes</button>
+						<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+							<span class="caret"></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{% url 'servico:detalheServico' servico.id %}">Detalhes</a></li>
+							<li><a href="{% url 'servico:editarServico' servico.id %}">Editar</a></li>
+							<li><a href="{% url 'servico:removeServico' servico.id %}">Deletar</a></li>
+							<li class="divider"></li>
+							<li><a href="{% url 'servico:homeServico' %}">Visitar Home</a></li>
+						</ul>
+					</div>
+				</td>
+				
+				<td>{{ servico.codigo }}</td>
+				<td>{{ servico.get_tipo_display }}</td>	
+				<td><strong>Servico: </strong>{{ servico.endereco }}</td>
+
+			</tr>
 			{% endfor %}
 		</tbody>
 	</table>

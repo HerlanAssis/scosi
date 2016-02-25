@@ -1,8 +1,8 @@
-#! -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
-from django.core.paginator import Paginator, InvalidPage, EmptyPage
+#from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from .forms import *
 from .models import *
 from servico.models import Servico
@@ -53,23 +53,8 @@ def adicionarCadastro(request):
 @login_required
 def listaCadastro(request):
 	lista_cadastro = Usuario.objects.filter(is_superuser=False)
-
-	paginator = Paginator(lista_cadastro, 25) # Mostra 25 elementos por página
-
-	try:
-		page = int(request.GET.get('page', '1'))
-	except ValueError:
-		page = 1
-
-	# Se o page request (9999) está fora da lista, mostre a última página.
-
-	try:
-		lista = paginator.page(page)
-	except (EmptyPage, InvalidPage):
-		lista = paginator.page(paginator.num_pages)
-
 	template_name = 'cadastro/lista_cadastro.html'
-	return render(request, template_name, {'lista_cadastros':lista},
+	return render(request, template_name, {'lista_cadastros':lista_cadastro},
 		context_instance=RequestContext(request))
 
 
@@ -85,11 +70,10 @@ def detalheCadastro(request, nr_item):
 @login_required
 def editarCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
-	endereco = get_object_or_404(Endereco, pk=cadastro.pk)
 	
 	if request.method == "POST":
 		form = FormUsuario(request.POST, request.FILES, instance=cadastro)
-		formEnd = FormEndereco(request.POST, request.FILES, instance=endereco)
+		formEnd = FormEndereco(request.POST, request.FILES, instance=cadastro.endereco)
 		if form.is_valid() and formEnd.is_valid():
 			cad = form.save(commit=False)
 			
@@ -100,7 +84,7 @@ def editarCadastro(request, nr_item):
 			return render_to_response("salvo.html", {}, context_instance=RequestContext(request))
 	else:
 		form = FormUsuario(instance=cadastro)
-		formEnd = FormEndereco(instance=endereco)
+		formEnd = FormEndereco(instance=cadastro.endereco)
 	return render_to_response("cadastro/adicionar_cadastro.html", {'form':form,
 		'formEnd':formEnd}, context_instance=RequestContext(request))
 
@@ -182,11 +166,10 @@ def detalheCliente(request, nr_item):
 @login_required
 def editarCliente(request, nr_item):
 	cliente = get_object_or_404(Usuario, pk=nr_item)
-	endereco = get_object_or_404(Endereco, pk=cliente.pk)
 	
 	if request.method == "POST":
 		form = FormCliente(request.POST, request.FILES, instance=cliente)
-		formEnd = FormEndereco(request.POST, request.FILES, instance=endereco)
+		formEnd = FormEndereco(request.POST, request.FILES, instance=cliente.endereco)
 		if form.is_valid() and formEnd.is_valid:
 			cad = form.save(commit=False)
 			
@@ -197,11 +180,10 @@ def editarCliente(request, nr_item):
 			return render_to_response("salvo.html", {}, context_instance=RequestContext(request))
 	else:
 		form = FormUsuario(instance=cliente)
-		formEnd = FormEndereco(instance=endereco)
+		formEnd = FormEndereco(instance=cliente.endereco)
 	return render_to_response("cadastro/adicionar_cliente.html", {'form':form, 
 		'formEnd':formEnd}, context_instance=RequestContext(request))
 	
-
 
 @permission_required('cadastro.delete_cliente', raise_exception=True)
 @login_required

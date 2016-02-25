@@ -1,8 +1,12 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
+
 from cadastro.models import Usuario, Cliente
 from servico.models import Servico
 
+@login_required
 def home(request):
 	todos_usuarios = Usuario.objects.all().order_by('-dataCadastro').filter(
 		is_active=True).filter(is_superuser=False)[:5]

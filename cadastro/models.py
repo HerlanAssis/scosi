@@ -1,11 +1,11 @@
-#! -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser,
 	PermissionsMixin, Group)
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from djchoices import DjangoChoices, ChoiceItem
 from localflavor.br.br_states import STATE_CHOICES
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
@@ -18,20 +19,21 @@ def homeServico(request):
 def adicionarServico(request):
 	if request.method == "POST":
 		form = FormServico(request.POST, request.FILES)
-		formEnd = FormEndereco(request.POST, request.FILES)
-		if form.is_valid() and formEnd.is_valid():
+		formEndereco = FormEndereco(request.POST, request.FILES)
+		if form.is_valid() and formEndereco.is_valid():
 			cad = form.save(commit=False)
-			
-			end = formEnd.save()
-			
+			end = formEndereco.save()
+
 			cad.endereco = end
+
 			cad.save()
-			return render_to_response("salvo.html", {}, context_instance=RequestContext(request))
+			form.save_m2m()
+			return render_to_response("salvo.html", {})
 	else:
 		form = FormServico()
-		formEnd = FormEndereco()
+		formEndereco = FormEndereco()
 	return render_to_response("servico/adicionar_servico.html", {'form':form, 
-		'formEnd':formEnd}, context_instance=RequestContext(request))
+		'formEnd':formEndereco}, context_instance=RequestContext(request))
 
 
 @permission_required('servico.change_servico', raise_exception=True)
@@ -62,13 +64,21 @@ def editarServico(request, nr_item):
 	servico = get_object_or_404(Servico, pk=nr_item)
 	if request.method == "POST":
 		form = FormServico(request.POST, request.FILES, instance=servico)
-		if form.is_valid():
-			form.save()
+		formEnd = FormEndereco(request.POST, request.FILES, instance=servico.endereco)
+		if form.is_valid() and formEnd.is_valid():
+			cad = form.save(commit=False)
+			
+			end = formEnd.save()
+			
+			cad.endereco = end
+			cad.save()
+			form.save_m2m()
 			return render_to_response("salvo.html", {}, context_instance=RequestContext(request))
 	else:
 		form = FormServico(instance=servico)
-	return render_to_response("servico/adicionar_servico.html", {'form':form}, 
-		context_instance=RequestContext(request))
+		formEnd = FormEndereco(instance=servico.endereco)
+	return render_to_response("servico/adicionar_servico.html", {'form':form, 
+		'formEnd':formEnd}, context_instance=RequestContext(request))
 
 
 @permission_required('servico.delete_servico', raise_exception=True)
