@@ -95,7 +95,11 @@ def removeCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
 	template_name = "cadastro/remove_cadastro.html"
 	if request.method == "POST":
-		cadastro.delete()
+		try:
+			cadastro.delete()
+		except Exception, e:
+			return render(request,"nao_permitido.html",{})
+			
 		return render(request,"removido.html", {})
 	return render(request,template_name,{'cadastro':cadastro})
 
@@ -187,7 +191,11 @@ def editarCliente(request, nr_item):
 def removeCliente(request, nr_item):
 	cliente = get_object_or_404(Cliente, pk=nr_item)
 	if request.method == "POST":
-		cliente.delete()
+		try:
+			cliente.delete()
+		except Exception, e:
+			return render(request,"nao_permitido.html",{})
+		
 		return render(request,"removido.html", {})
 	return render(request, "cadastro/remove_cliente.html",
 		{'cliente':cliente})

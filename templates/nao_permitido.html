@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block titulo %}{{block.super}}: - Operação não permitida{% endblock %}
+
+{% block corpo %}
+<div class="content">
+	<h1>Operação não permitida!</h1>
+	<p>A operação que você solicitou não pode ser realizada, verifique se este objeto está relacionado com outros objetos e/ou está em uso. <br/>
+	Para mais detalhes entre em contato com o administrador do site.
+	</p>
+</div>
+{% endblock %}

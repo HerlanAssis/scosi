@@ -93,12 +93,16 @@ def editarServico(request, nr_item):
 def removeServico(request, nr_item):
 	servico = get_object_or_404(Servico, pk=nr_item)
 	context = {'servico':servico}
-
 	if request.method == "POST":
-		servico.delete()
+		try:
+			servico.delete()
+		except Exception, e:
+			return render(request,"nao_permitido.html",{})
+			
 		return render(request,"removido.html", {})
-
 	return render(request, "servico/remove_servico.html", context)
+
+
 
 @login_required
 def homeEquipamento(request):
@@ -167,6 +171,10 @@ def removeEquipamento(request, nr_item):
 	equipamento = get_object_or_404(Equipamento, pk=nr_item)
 	context = {'equipamento':equipamento}
 	if request.method == "POST":
-		equipamento.delete()
+		try:
+			equipamento.delete()
+		except Exception, e:
+			return render(request,"nao_permitido.html",{})
+		
 		return render(request,"removido.html", {})
 	return render(request, "servico/remove_equipamento.html", context)
