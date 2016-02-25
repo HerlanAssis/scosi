@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render, render_to_response, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required, permission_required
 from django.template import RequestContext
 #from django.core.paginator import Paginator, InvalidPage, EmptyPage
@@ -17,7 +17,7 @@ def homeCadastro(request):
 		is_superuser=False).filter(is_active=True).filter(tipo=2)
 	tecnicos = Usuario.objects.filter(
 		is_superuser=False).filter(is_active=True).filter(tipo=3)
-	
+
 	context = {
 		'usuarios':usuarios,
 		'supervisores':supervisores,
@@ -27,7 +27,7 @@ def homeCadastro(request):
 
 	template_name = 'cadastro/inicio_cadastro.html'
 
-	return render(request, template_name, context, context_instance=RequestContext(request))
+	return render(request, template_name, context)
 
 @permission_required('cadastro.add_usuario', raise_exception=True)
 @login_required
@@ -37,68 +37,67 @@ def adicionarCadastro(request):
 		formEnd = FormEndereco(request.POST, request.FILES)
 		if form.is_valid() and formEnd.is_valid():
 			cad = form.save(commit=False)
-			
+
 			end = formEnd.save()
-			
+
 			cad.endereco = end
 			cad.save()
-			return render_to_response("salvo.html", {}, context_instance=RequestContext(request))
+			return render(request, "salvo.html", {})
 	else:
 		form = FormUsuario()
 		formEnd = FormEndereco()
-	return render_to_response("cadastro/adicionar_cadastro.html", {'form':form, 
-		'formEnd':formEnd}, context_instance=RequestContext(request))
+	return render(request,"cadastro/adicionar_cadastro.html",
+		{'form':form,'formEnd':formEnd})
 
 @permission_required('cadastro.change_usuario', raise_exception=True)
 @login_required
 def listaCadastro(request):
 	lista_cadastro = Usuario.objects.filter(is_superuser=False)
 	template_name = 'cadastro/lista_cadastro.html'
-	return render(request, template_name, {'lista_cadastros':lista_cadastro},
-		context_instance=RequestContext(request))
+	return render(request, template_name,
+		{'lista_cadastros':lista_cadastro},)
 
 
 @permission_required('cadastro.change_usuario', raise_exception=True)
 @login_required
 def detalheCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
-	return render_to_response('cadastro/detalhe_cadastro.html',
-		{'cadastro':cadastro}, context_instance=RequestContext(request))
+	template_name = 'cadastro/detalhe_cadastro.html'
+	return render(request, template_name, {'cadastro':cadastro})
 
 
 @permission_required('cadastro.change_usuario', raise_exception=True)
 @login_required
 def editarCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
-	
+
 	if request.method == "POST":
 		form = FormUsuario(request.POST, request.FILES, instance=cadastro)
 		formEnd = FormEndereco(request.POST, request.FILES, instance=cadastro.endereco)
 		if form.is_valid() and formEnd.is_valid():
 			cad = form.save(commit=False)
-			
+
 			end = formEnd.save()
-			
+
 			cad.endereco = end
 			cad.save()
-			return render_to_response("salvo.html", {}, context_instance=RequestContext(request))
+			return render(request,"salvo.html", {})
 	else:
 		form = FormUsuario(instance=cadastro)
 		formEnd = FormEndereco(instance=cadastro.endereco)
-	return render_to_response("cadastro/adicionar_cadastro.html", {'form':form,
-		'formEnd':formEnd}, context_instance=RequestContext(request))
+	return render(request,"cadastro/adicionar_cadastro.html",
+		{'form':form,'formEnd':formEnd})
 
 
 @permission_required('cadastro.delete_usuario', raise_exception=True)
 @login_required
 def removeCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
+	template_name = "cadastro/remove_cadastro.html"
 	if request.method == "POST":
 		cadastro.delete()
-		return render_to_response("removido.html", {},
-			context_instance=RequestContext(request))
-	return render_to_response("cadastro/remove_cadastro.html",
-		{'cadastro':cadastro}, context_instance=RequestContext(request))
+		return render(request,"removido.html", {})
+	return render(request,template_name,{'cadastro':cadastro})
 
 
 @login_required
@@ -121,8 +120,7 @@ def homeCliente(request):
 	}
 
 	template_name = 'cadastro/inicio_cliente.html'
-	return render(request, template_name, context,
-		context_instance=RequestContext(request))
+	return render(request, template_name, context)
 
 @permission_required('cadastro.add_cliente', raise_exception=True)
 @login_required
@@ -132,17 +130,17 @@ def adicionarCliente(request):
 		formEnd = FormEndereco(request.POST, request.FILES)
 		if form.is_valid() and formEnd.is_valid():
 			cad = form.save(commit=False)
-			
+
 			end = formEnd.save()
-			
+
 			cad.endereco = end
 			cad.save()
-			return render_to_response("salvo.html", {}, context_instance=RequestContext(request))
+			return render(request,"salvo.html", {})
 	else:
 		form = FormCliente()
 		formEnd = FormEndereco()
-	return render_to_response("cadastro/adicionar_cliente.html", {'form':form, 
-		'formEnd':formEnd}, context_instance=RequestContext(request))
+	return render(request,"cadastro/adicionar_cliente.html",
+		{'form':form, 'formEnd':formEnd})
 
 
 @permission_required('cadastro.change_cliente', raise_exception=True)
@@ -158,8 +156,8 @@ def listaCliente(request):
 @login_required
 def detalheCliente(request, nr_item):
 	cliente = get_object_or_404(Cliente, pk=nr_item)
-	return render_to_response('cadastro/detalhe_cliente.html',
-		{'cliente':cliente}, context_instance=RequestContext(request))
+	context = {'cliente':cliente}
+	return render(request,template_name, context)
 
 
 @permission_required('cadastro.change_cliente', raise_exception=True)
@@ -171,18 +169,18 @@ def editarCliente(request, nr_item):
 		formEnd = FormEndereco(request.POST, request.FILES, instance=cliente.endereco)
 		if form.is_valid() and formEnd.is_valid:
 			cad = form.save(commit=False)
-			
+
 			end = formEnd.save()
-			
+
 			cad.endereco = end
 			cad.save()
-			return render_to_response("salvo.html", {}, context_instance=RequestContext(request))
+			return render(request,"salvo.html", {})
 	else:
 		form = FormCliente(instance=cliente)
 		formEnd = FormEndereco(instance=cliente.endereco)
-	return render_to_response("cadastro/adicionar_cliente.html", {'form':form, 
-		'formEnd':formEnd}, context_instance=RequestContext(request))
-	
+	return render(request, "cadastro/adicionar_cliente.html",
+		{'form':form, 'formEnd':formEnd})
+
 
 @permission_required('cadastro.delete_cliente', raise_exception=True)
 @login_required
@@ -190,6 +188,6 @@ def removeCliente(request, nr_item):
 	cliente = get_object_or_404(Cliente, pk=nr_item)
 	if request.method == "POST":
 		cliente.delete()
-		return render_to_response("removido.html", {}, context_instance=RequestContext(request))
-	return render_to_response("cadastro/remove_cliente.html", {'cliente':cliente}, 
-		context_instance=RequestContext(request))
+		return render(request,"removido.html", {})
+	return render(request, "cadastro/remove_cliente.html",
+		{'cliente':cliente})
