@@ -29,7 +29,7 @@ def homeCadastro(request):
 
 	return render(request, template_name, context, context_instance=RequestContext(request))
 
-@permission_required('cadastro.add_cadastro', raise_exception=True)
+@permission_required('cadastro.add_usuario', raise_exception=True)
 @login_required
 def adicionarCadastro(request):
 	if request.method == "POST":
@@ -49,7 +49,7 @@ def adicionarCadastro(request):
 	return render_to_response("cadastro/adicionar_cadastro.html", {'form':form, 
 		'formEnd':formEnd}, context_instance=RequestContext(request))
 
-@permission_required('cadastro.change_cadastro', raise_exception=True)
+@permission_required('cadastro.change_usuario', raise_exception=True)
 @login_required
 def listaCadastro(request):
 	lista_cadastro = Usuario.objects.filter(is_superuser=False)
@@ -58,7 +58,7 @@ def listaCadastro(request):
 		context_instance=RequestContext(request))
 
 
-@permission_required('cadastro.change_cadastro', raise_exception=True)
+@permission_required('cadastro.change_usuario', raise_exception=True)
 @login_required
 def detalheCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
@@ -66,7 +66,7 @@ def detalheCadastro(request, nr_item):
 		{'cadastro':cadastro}, context_instance=RequestContext(request))
 
 
-@permission_required('cadastro.change_cadastro', raise_exception=True)
+@permission_required('cadastro.change_usuario', raise_exception=True)
 @login_required
 def editarCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
@@ -89,7 +89,7 @@ def editarCadastro(request, nr_item):
 		'formEnd':formEnd}, context_instance=RequestContext(request))
 
 
-@permission_required('cadastro.delete_cadastro', raise_exception=True)
+@permission_required('cadastro.delete_usuario', raise_exception=True)
 @login_required
 def removeCadastro(request, nr_item):
 	cadastro = get_object_or_404(Usuario, pk=nr_item)
