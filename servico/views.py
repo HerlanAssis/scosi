@@ -62,7 +62,7 @@ def detalheServico(request, nr_item):
 	servico = get_object_or_404(Servico, pk=nr_item)
 	template_name = 'servico/detalhe_servico.html'
 	context = {'servico': servico}
-	return request(request, template_name, context)
+	return render(request, template_name, context)
 
 
 @permission_required('servico.change_servico', raise_exception=True)

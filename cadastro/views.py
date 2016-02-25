@@ -156,8 +156,8 @@ def listaCliente(request):
 @login_required
 def detalheCliente(request, nr_item):
 	cliente = get_object_or_404(Cliente, pk=nr_item)
-	context = {'cliente':cliente}
-	return render(request,template_name, context)
+	template_name = 'cadastro/detalhe_cliente.html'
+	return render(request,template_name, {'cliente':cliente})
 
 
 @permission_required('cadastro.change_cliente', raise_exception=True)
