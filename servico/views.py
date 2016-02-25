@@ -149,7 +149,8 @@ def editarEquipamento(request, nr_item):
 		form = FormEquipamento(request.POST, request.FILES, instance=equipamento)
 		if form.is_valid():
 			form.save()
-			return render_to_response("salvo.html", {},context_instance=RequestContext(request))
+			return render_to_response("salvo.html", {},
+				context_instance=RequestContext(request))
 	else:
 		form = FormEquipamento(instance=equipamento)
 	

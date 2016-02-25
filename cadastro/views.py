@@ -166,7 +166,6 @@ def detalheCliente(request, nr_item):
 @login_required
 def editarCliente(request, nr_item):
 	cliente = get_object_or_404(Usuario, pk=nr_item)
-	
 	if request.method == "POST":
 		form = FormCliente(request.POST, request.FILES, instance=cliente)
 		formEnd = FormEndereco(request.POST, request.FILES, instance=cliente.endereco)
@@ -179,7 +178,7 @@ def editarCliente(request, nr_item):
 			cad.save()
 			return render_to_response("salvo.html", {}, context_instance=RequestContext(request))
 	else:
-		form = FormUsuario(instance=cliente)
+		form = FormCliente(instance=cliente)
 		formEnd = FormEndereco(instance=cliente.endereco)
 	return render_to_response("cadastro/adicionar_cliente.html", {'form':form, 
 		'formEnd':formEnd}, context_instance=RequestContext(request))
