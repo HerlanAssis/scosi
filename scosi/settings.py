@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'y!ahoh2-3b_p$sp-(*kv6974nt3pworhrr$5$txk7@uu)#i6k0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ADMINS = [('Herlan Assis', 'herlanassis@gmail.com'), ]
 

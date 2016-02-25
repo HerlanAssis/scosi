@@ -24,7 +24,7 @@ class Equipamento(models.Model):
 		ordering = ("nome",)
 
 
-#@python_2_unicode_compatible
+@python_2_unicode_compatible
 class Servico(models.Model):
 
 	INSTALACAO = 'INS'
