@@ -10,17 +10,6 @@ Tecnico_permissions = (
 )
 
 Secretaria_permissions = (
-	'cadastro.add_uf',
-	'cadastro.change_uf',
-	'cadastro.delete_uf',
-
-	'cadastro.add_municipio',
-	'cadastro.change_municipio',
-	'cadastro.delete_municipio',
-
-	'cadastro.add_bairro',
-	'cadastro.change_bairro',
-	'cadastro.delete_bairro',
 
 	'cadastro.add_endereco',
 	'cadastro.change_endereco',
@@ -38,18 +27,7 @@ Secretaria_permissions = (
 )
 
 Supervisor_permissions = (
-	'cadastro.add_uf',
-	'cadastro.change_uf',
-	'cadastro.delete_uf',
-
-	'cadastro.add_municipio',
-	'cadastro.change_municipio',
-	'cadastro.delete_municipio',
-
-	'cadastro.add_bairro',
-	'cadastro.change_bairro',
-	'cadastro.delete_bairro',
-
+	
 	'cadastro.add_endereco',
 	'cadastro.change_endereco',
 	'cadastro.delete_endereco',

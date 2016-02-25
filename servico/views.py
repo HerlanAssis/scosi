@@ -8,7 +8,12 @@ from cadastro.forms import FormEndereco
 
 @login_required
 def homeServico(request):
-	servico = Servico.objects.filter(situacao=True).filter(status=False)
+	if request.user.tipo == Usuario.Tipo.Tecnico:
+		servico = Servico.objects.filter(
+		funcionario=request.user).filter(situacao=True)
+	else:
+		servico = Servico.objects.filter(situacao=True).filter(status=False)
+	
 	template_name='servico/inicio_servico.html'
 	return render(request, template_name, {'servicos_pendentes':servico},
 		context_instance=RequestContext(request))
@@ -39,7 +44,7 @@ def adicionarServico(request):
 @permission_required('servico.change_servico', raise_exception=True)
 @login_required
 def listaServico(request):
-	if request.user.Tipo.Tecnico and not request.user.is_staff:
+	if request.user.tipo == Usuario.Tipo.Tecnico:
 		lista_servicos = Servico.objects.filter(
 		funcionario=request.user).filter(situacao=True)
 	else:
